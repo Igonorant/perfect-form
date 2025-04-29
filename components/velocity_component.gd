@@ -3,7 +3,7 @@ class_name VelocityComponent
 
 @export var velocity_limit : float = 300 # maximum velocity in pixels/sec
 @export var acceleration : float = 1500 # pixels/sec^2
-@export var friction : float = 0.05 # pixels/sec^2
+@export var friction : float = 0.05 # % of velocity
 var m_velocity : Vector2
 var m_direction : Vector2
 var m_min_velocity : float
