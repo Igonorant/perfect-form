@@ -11,9 +11,7 @@ var m_direction : Vector2
 
 
 func _ready() -> void:
-    m_velocity = Vector2.ZERO
     m_direction = Vector2.ZERO
-    assert(acceleration > static_friction, "Friction should not be greater than acceleration—it doesn't make sense.")
 
 
 func _process(delta: float) -> void:
