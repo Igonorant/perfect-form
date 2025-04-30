@@ -26,18 +26,18 @@ func _process(delta: float) -> void:
     m_velocity = m_velocity.limit_length(velocity_limit)
 
 
-func _add_friction(velocity_component: float, delta: float) -> float:
-    var deceleration: float = static_friction * delta
+func _add_friction(velocity_axis: float, delta: float) -> float:
+    var velocity_decrement: float = static_friction * delta
 
     # Avoids oscilations in velocity when deceleration would invert velocity sign
-    if abs(velocity_component) < deceleration:
+    if abs(velocity_axis) < velocity_decrement:
         return 0.0
 
     # Apply dynamic and static friction
-    velocity_component *= (1.0 - dynamic_friction * delta)
-    velocity_component -= sign(velocity_component) * deceleration
+    velocity_axis *= (1.0 - dynamic_friction * delta)
+    velocity_axis -= sign(velocity_axis) * velocity_decrement
 
-    return velocity_component
+    return velocity_axis
 
 
 func set_direction(direction: Vector2) -> void:

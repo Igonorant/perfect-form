@@ -2,6 +2,7 @@ class_name Projectile
 extends Area2D
 
 @onready var c_velocity : VelocityComponent = $VelocityComponent
+@onready var m_screen_size = get_viewport_rect().size
 
 @export var speed : float = 300
 
@@ -18,6 +19,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
     var velocity : Vector2 = c_velocity.get_velocity()
     position += velocity * delta
+    position = position.clamp(Vector2.ZERO, m_screen_size)
 
 
 func _on_life_timeout() -> void:
