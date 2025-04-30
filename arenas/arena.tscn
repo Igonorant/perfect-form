@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://f6kdul6wfu40"]
+[gd_scene load_steps=7 format=3 uid="uid://f6kdul6wfu40"]
 
+[ext_resource type="Script" uid="uid://cxbfvyanvy4bw" path="res://arenas/arena.gd" id="1_erld0"]
 [ext_resource type="PackedScene" uid="uid://cqtr5u7m31ils" path="res://characters/player.tscn" id="1_qfwod"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ubfh8"]
@@ -14,6 +15,7 @@ normal = Vector2(1, 0)
 normal = Vector2(-1, 0)
 
 [node name="Arena" type="Node2D"]
+script = ExtResource("1_erld0")
 
 [node name="Player" parent="." instance=ExtResource("1_qfwod")]
 position = Vector2(662, 353)
@@ -33,3 +35,9 @@ shape = SubResource("WorldBoundaryShape2D_27ga2")
 [node name="Right" type="CollisionShape2D" parent="Border"]
 position = Vector2(1280, 720)
 shape = SubResource("WorldBoundaryShape2D_h0wof")
+
+[node name="SpawnEnemyTimer" type="Timer" parent="."]
+wait_time = 0.15
+autostart = true
+
+[connection signal="timeout" from="SpawnEnemyTimer" to="." method="_on_spawn_enemy_timer_timeout"]

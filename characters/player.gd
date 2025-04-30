@@ -14,7 +14,7 @@ func _ready() -> void:
     m_player_last_input_direction = Vector2.ZERO
 
     
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
     _calculate_direction()
     _handle_inputs()
     _move()

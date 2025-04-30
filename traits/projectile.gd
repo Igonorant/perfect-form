@@ -16,7 +16,7 @@ func _ready() -> void:
     c_velocity.m_velocity = m_spawn_direction.normalized() * speed
 
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
     var velocity : Vector2 = c_velocity.get_velocity()
     position += velocity * delta
     position = position.clamp(Vector2.ZERO, m_screen_size)
