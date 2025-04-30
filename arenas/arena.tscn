@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://f6kdul6wfu40"]
 
-[ext_resource type="PackedScene" uid="uid://cqtr5u7m31ils" path="res://player.tscn" id="1_ubfh8"]
+[ext_resource type="PackedScene" uid="uid://cqtr5u7m31ils" path="res://characters/player.tscn" id="1_qfwod"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ubfh8"]
 normal = Vector2(0, 1)
@@ -15,7 +15,7 @@ normal = Vector2(-1, 0)
 
 [node name="Arena" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_ubfh8")]
+[node name="Player" parent="." instance=ExtResource("1_qfwod")]
 position = Vector2(662, 353)
 
 [node name="Border" type="StaticBody2D" parent="."]

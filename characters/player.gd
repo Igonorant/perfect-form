@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @onready var c_velocity : VelocityComponent = $VelocityComponent
 @onready var n_sprite : Sprite2D = $Sprite2D
-@onready var scn_projectile = preload("res://projectile.tscn")
+@onready var scn_projectile = preload("res://traits/projectile.tscn")
 
 var m_player_input_direction : Vector2 # Player inputs direction
 var m_player_last_input_direction : Vector2 # Player last inputs direction
