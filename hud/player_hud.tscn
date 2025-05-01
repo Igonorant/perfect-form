@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://btiu0rtlstvr5"]
+[gd_scene load_steps=5 format=3 uid="uid://btiu0rtlstvr5"]
 
+[ext_resource type="Script" uid="uid://cm3lxlq7w8pc3" path="res://hud/player_hud.gd" id="1_uo4yc"]
 [ext_resource type="Texture2D" uid="uid://b1rle3pptumof" path="res://assets/spritetopus.png" id="1_yirs3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_girky"]
@@ -9,6 +10,7 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(1, 0, 0, 1)
 
 [node name="PlayerHUD" type="Node"]
+script = ExtResource("1_uo4yc")
 
 [node name="TopLeftHUD" type="Polygon2D" parent="."]
 position = Vector2(0.172104, 0.41535)

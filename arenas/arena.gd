@@ -1,3 +1,4 @@
+@icon("res://assets/icons/arena.png")
 class_name Arena
 extends Node2D
 

@@ -1,3 +1,4 @@
+@icon("res://assets/placeholder_lightning_effect.png")
 class_name Shockwave
 extends Node2D
 

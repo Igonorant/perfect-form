@@ -1,3 +1,4 @@
+@icon("res://assets/icons/boots.png")
 class_name VelocityComponent
 extends Node
 
