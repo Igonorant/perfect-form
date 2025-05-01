@@ -51,6 +51,7 @@ func _spawn_projectile() -> void:
 func _spawn_shockwave() -> void:
     var shockwave_instance : Shockwave = scn_shockwave.instantiate()
     shockwave_instance.m_spawn_position = position
+    shockwave_instance.m_spawn_rotation = randf_range(0.0, TAU)
     shockwave_instance.set_spawner(self)
     owner.add_child(shockwave_instance)
 

@@ -2,10 +2,12 @@ class_name Shockwave
 extends Node2D
 
 var m_spawn_position : Vector2
+var m_spawn_rotation : float
 var m_spawner : Node2D
 
 func _ready() -> void:
     position = m_spawn_position
+    rotation = m_spawn_rotation
 
 
 func _physics_process(_delta: float) -> void:

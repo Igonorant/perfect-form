@@ -67,3 +67,4 @@ atk_e={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"
+environment/defaults/default_clear_color=Color(0.0187519, 1.24087e-07, 0.0103746, 1)

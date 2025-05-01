@@ -9,6 +9,7 @@ extends Area2D
 
 var m_spawn_direction : Vector2
 var m_spawn_position : Vector2
+var m_effect : Node2D
 
 func _ready() -> void:
     position = m_spawn_position
@@ -16,6 +17,9 @@ func _ready() -> void:
     c_velocity.set_direction(m_spawn_direction)
     c_velocity.velocity_limit = speed
     c_velocity.m_velocity = m_spawn_direction.normalized() * speed
+    m_effect = get_node_or_null("ShakingLightningEffect")
+    if (m_effect):
+        m_effect.rotation = randf_range(0.0, TAU)
 
 
 func _physics_process(delta: float) -> void:
