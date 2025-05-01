@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ctbnto7f4ovr7"]
+[gd_scene load_steps=9 format=3 uid="uid://ctbnto7f4ovr7"]
 
 [ext_resource type="Script" uid="uid://q5868nlellyn" path="res://traits/projectile.gd" id="1_dgwo2"]
 [ext_resource type="Texture2D" uid="uid://jm4emo7kt814" path="res://assets/poderzin.png" id="1_qxf0c"]
+[ext_resource type="PackedScene" uid="uid://8vfq3sh7p24k" path="res://effects/shaking_lightning_effect.tscn" id="2_7c74f"]
 [ext_resource type="Script" uid="uid://djmqb2cpcmfek" path="res://components/velocity_component.gd" id="2_dgwo2"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box_component.tscn" id="4_4mxer"]
 
@@ -10,6 +11,8 @@ radius = 11.0114
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4mxer"]
 radius = 11.0
+
+[sub_resource type="GDScript" id="GDScript_7c74f"]
 
 [node name="Projectile" type="Area2D"]
 script = ExtResource("1_dgwo2")
@@ -37,6 +40,9 @@ autostart = true
 position = Vector2(0, 0.5)
 shape = SubResource("CircleShape2D_4mxer")
 debug_color = Color(1, 0, 0, 0.392157)
+
+[node name="ShakingLightningEffect" parent="." instance=ExtResource("2_7c74f")]
+script = SubResource("GDScript_7c74f")
 
 [connection signal="timeout" from="Life" to="." method="_on_life_timeout"]
 [connection signal="hurt_body" from="HurtBoxComponent" to="." method="_on_hurt_box_component_hurt_body"]
