@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var c_velocity : VelocityComponent = $VelocityComponent
 @onready var n_sprite : Sprite2D = $Sprite2D
 @onready var scn_projectile = preload("res://traits/projectile.tscn")
+@onready var scn_shockwave = preload("res://traits/shockwave.tscn")
 
 var m_player_input_direction : Vector2 # Player inputs direction
 var m_player_last_input_direction : Vector2 # Player last inputs direction
@@ -32,6 +33,8 @@ func _calculate_direction() -> void:
 func _handle_inputs() -> void:
     if Input.is_action_just_pressed("atk_q"):
         _spawn_projectile()
+    if Input.is_action_just_pressed("atk_e"):
+        _spawn_shockwave()
 
 
 func _spawn_projectile() -> void:
@@ -43,6 +46,13 @@ func _spawn_projectile() -> void:
     projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
     projectile_instance.speed = max(velocity.length() * 3, 300)
     owner.add_child(projectile_instance)
+
+
+func _spawn_shockwave() -> void:
+    var shockwave_instance : Shockwave = scn_shockwave.instantiate()
+    shockwave_instance.m_spawn_position = position
+    shockwave_instance.set_spawner(self)
+    owner.add_child(shockwave_instance)
 
 
 func _move() -> void:

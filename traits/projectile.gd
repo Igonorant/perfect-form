@@ -5,12 +5,14 @@ extends Area2D
 @onready var m_screen_size = get_viewport_rect().size
 
 @export var speed : float = 300
+@export var rotation_speed : float = 0.1 * PI
 
 var m_spawn_direction : Vector2
 var m_spawn_position : Vector2
 
 func _ready() -> void:
     position = m_spawn_position
+    rotation = m_spawn_direction.angle()
     c_velocity.set_direction(m_spawn_direction)
     c_velocity.velocity_limit = speed
     c_velocity.m_velocity = m_spawn_direction.normalized() * speed
@@ -20,6 +22,7 @@ func _physics_process(delta: float) -> void:
     var velocity : Vector2 = c_velocity.get_velocity()
     position += velocity * delta
     position = position.clamp(Vector2.ZERO, m_screen_size)
+    rotation += rotation_speed * delta
 
 
 func _on_life_timeout() -> void:
