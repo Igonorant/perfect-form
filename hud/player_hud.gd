@@ -2,7 +2,7 @@
 class_name PlayerHUD
 extends Node
 
-@export var player : Player
+@export var player: Player
 
 @onready var health_bar = $TopLeftHUD/HealthBar
 @onready var player_health_component = player.c_health

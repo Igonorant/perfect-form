@@ -1,7 +1,7 @@
 class_name HurtBoxComponent
 extends Area2D
 
-@export var damage : float = 0.0
+@export var damage: float = 0.0
 
 signal hurt_body(body: Node2D, damage: float)
 

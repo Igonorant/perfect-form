@@ -2,3 +2,4 @@
 /android/
 addons/
 *.translation
+.vscode

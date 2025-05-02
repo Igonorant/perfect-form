@@ -1,29 +1,29 @@
 class_name Player
 extends CharacterBody2D
 
-@onready var c_velocity : VelocityComponent = $VelocityComponent
-@onready var c_health : HealthComponent = $HealthComponent
-@onready var n_sprite : Sprite2D = $Sprite2D
+@onready var c_velocity: VelocityComponent = $VelocityComponent
+@onready var c_health: HealthComponent = $HealthComponent
+@onready var n_sprite: Sprite2D = $Sprite2D
 @onready var scn_projectile = preload("res://traits/projectileZap.tscn")
 @onready var scn_shockwave = preload("res://traits/shockwave.tscn")
 
 
-var m_player_input_direction : Vector2 # Player inputs direction
-var m_player_last_input_direction : Vector2 # Player last inputs direction
+var m_player_input_direction: Vector2 # Player inputs direction
+var m_player_last_input_direction: Vector2 # Player last inputs direction
 
 
 func _ready() -> void:
     m_player_input_direction = Vector2.ZERO
     m_player_last_input_direction = Vector2.ZERO
 
-    
+
 func _physics_process(_delta: float) -> void:
     _calculate_direction()
     _handle_inputs()
     _move()
     _update_sprite_direction()
 
-   
+
 func _calculate_direction() -> void:
     m_player_input_direction = Vector2.ZERO
     m_player_input_direction.x = Input.get_axis("move_left", "move_right");
@@ -40,7 +40,7 @@ func _handle_inputs() -> void:
 
 
 func _spawn_projectile() -> void:
-    var projectile_instance : Projectile = scn_projectile.instantiate()
+    var projectile_instance: Projectile = scn_projectile.instantiate()
     if (velocity.is_zero_approx()):
         projectile_instance.m_spawn_direction = m_player_last_input_direction.normalized()
     else:
@@ -51,7 +51,7 @@ func _spawn_projectile() -> void:
 
 
 func _spawn_shockwave() -> void:
-    var shockwave_instance : Shockwave = scn_shockwave.instantiate()
+    var shockwave_instance: Shockwave = scn_shockwave.instantiate()
     shockwave_instance.m_spawn_position = position
     shockwave_instance.m_spawn_rotation = randf_range(0.0, TAU)
     shockwave_instance.set_spawner(self)

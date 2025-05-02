@@ -2,13 +2,13 @@
 class_name VelocityComponent
 extends Node
 
-@export var velocity_limit : float = 300.0 # maximum velocity in pixels/sec
-@export var acceleration : float = 1500.0 # pixels/sec^2
-@export var dynamic_friction : float = 3.0 # deceleration in %/sec (1 means 100%/s)
-@export var static_friction : float = 300.0 # deceleration in pixels/sec^2
+@export var velocity_limit: float = 300.0 # maximum velocity in pixels/sec
+@export var acceleration: float = 1500.0 # pixels/sec^2
+@export var dynamic_friction: float = 3.0 # deceleration in %/sec (1 means 100%/s)
+@export var static_friction: float = 300.0 # deceleration in pixels/sec^2
 
-var m_velocity : Vector2
-var m_direction : Vector2
+var m_velocity: Vector2
+var m_direction: Vector2
 
 
 func _ready() -> void:
