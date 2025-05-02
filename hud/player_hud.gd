@@ -14,4 +14,4 @@ func _ready() -> void:
 
 
 func _update_health_bar() -> void:
-    health_bar.value = player_health_component.get_percentage_health()
+    health_bar.value = player_health_component.get_percentage_health() * 100.0
