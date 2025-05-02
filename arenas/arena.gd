@@ -12,6 +12,7 @@ func _on_spawn_enemy_timer_timeout() -> void:
     
     # Making enemy follow the player
     enemy.set_target(player)
+    enemy.get_hurt_box().connect_damage_handler(_handle_hurt)
     
     # Ensure a minimum distance of ~450 pixels from the player
     var distance_from_player_squared = pow(450, 2.0)
@@ -22,3 +23,8 @@ func _on_spawn_enemy_timer_timeout() -> void:
     
     # Spawn the enemy
     add_child(enemy)
+
+func _handle_hurt(body: Node2D, damage: float):
+    if (body == player):
+        player.take_damage(damage)
+    

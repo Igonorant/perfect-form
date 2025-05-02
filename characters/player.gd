@@ -71,3 +71,6 @@ func _update_sprite_direction() -> void:
             n_sprite.flip_h = false
     elif (m_player_input_direction.x > 0.0):
         n_sprite.flip_h = true
+
+func take_damage(amount: float) -> void:
+    c_health.deal_damage(amount)

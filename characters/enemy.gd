@@ -15,3 +15,6 @@ func _physics_process(_delta: float) -> void:
 
 func set_target(target : Node2D) -> void:
     m_target = target
+
+func get_hurt_box() -> HurtBoxComponent:
+    return $HurtBoxComponent
