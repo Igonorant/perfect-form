@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @onready var c_velocity: VelocityComponent = $VelocityComponent
 @onready var c_health: HealthComponent = $HealthComponent
+@onready var n_invulnerability_timer: Timer = $InvulnerabilityTimer
+@onready var n_blinking_animation: BlinkingAnimation = $BlinkingAnimation
 @onready var n_sprite: Sprite2D = $Sprite2D
 @onready var scn_projectile = preload("res://traits/projectile_zap.tscn")
 @onready var scn_shockwave = preload("res://traits/shockwave.tscn")
@@ -16,13 +18,11 @@ func _ready() -> void:
     m_player_input_direction = Vector2.ZERO
     m_player_last_input_direction = Vector2.ZERO
 
-
 func _physics_process(_delta: float) -> void:
     _calculate_direction()
     _handle_inputs()
     _move()
     _update_sprite_direction()
-
 
 func _calculate_direction() -> void:
     m_player_input_direction = Vector2.ZERO
@@ -31,13 +31,11 @@ func _calculate_direction() -> void:
     if (!m_player_input_direction.is_zero_approx()):
         m_player_last_input_direction = m_player_input_direction
 
-
 func _handle_inputs() -> void:
     if Input.is_action_just_pressed("atk_q"):
         _spawn_projectile()
     if Input.is_action_just_pressed("atk_e"):
         _spawn_shockwave()
-
 
 func _spawn_projectile() -> void:
     var projectile_instance: Projectile = scn_projectile.instantiate()
@@ -49,7 +47,6 @@ func _spawn_projectile() -> void:
     #projectile_instance.speed = max(velocity.length() * 3, 300)
     owner.add_child(projectile_instance)
 
-
 func _spawn_shockwave() -> void:
     var shockwave_instance: Shockwave = scn_shockwave.instantiate()
     shockwave_instance.m_spawn_position = position
@@ -57,12 +54,10 @@ func _spawn_shockwave() -> void:
     shockwave_instance.set_spawner(self)
     owner.add_child(shockwave_instance)
 
-
 func _move() -> void:
     c_velocity.set_direction(m_player_input_direction)
     velocity = c_velocity.get_velocity()
     move_and_slide()
-
 
 func _update_sprite_direction() -> void:
     # This needs to be a little bit complex to avoid flipping the sprite when input direction is 0.
@@ -73,4 +68,7 @@ func _update_sprite_direction() -> void:
         n_sprite.flip_h = true
 
 func take_damage(amount: float) -> void:
-    c_health.deal_damage(amount)
+    if (n_invulnerability_timer.is_stopped()):
+        c_health.deal_damage(amount)
+        n_invulnerability_timer.start()
+        n_blinking_animation.start_blinking(n_invulnerability_timer.wait_time)
