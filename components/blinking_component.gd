@@ -1,5 +1,5 @@
 @icon("res://assets/icons/blinking.png")
-class_name BlinkingAnimation
+class_name BlinkingComponent
 extends Node
 
 @onready var m_blinking_timer: Timer = $IntervalTimer

@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=3 uid="uid://cvl0gxgska63"]
 
-[ext_resource type="Script" uid="uid://cx5drwlhdu3xr" path="res://components/blinking_animation.gd" id="1_r6rc0"]
+[ext_resource type="Script" uid="uid://cx5drwlhdu3xr" path="res://components/blinking_component.gd" id="1_r6rc0"]
 
-[node name="BlinkingAnimation" type="Node"]
+[node name="BlinkingComponent" type="Node"]
 script = ExtResource("1_r6rc0")
 
 [node name="IntervalTimer" type="Timer" parent="."]
