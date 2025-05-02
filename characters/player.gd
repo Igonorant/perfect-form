@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var c_velocity: VelocityComponent = $VelocityComponent
 @onready var c_health: HealthComponent = $HealthComponent
 @onready var n_sprite: Sprite2D = $Sprite2D
-@onready var scn_projectile = preload("res://traits/projectileZap.tscn")
+@onready var scn_projectile = preload("res://traits/projectile_zap.tscn")
 @onready var scn_shockwave = preload("res://traits/shockwave.tscn")
 
 
