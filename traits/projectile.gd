@@ -7,6 +7,8 @@ extends Area2D
 @export var speed : float = 300
 @export var rotation_speed : float = 0.1 * PI
 
+@export var destroy_on_hit : bool
+
 var m_spawn_direction : Vector2
 var m_spawn_position : Vector2
 var m_effect : Node2D
@@ -35,3 +37,5 @@ func _on_life_timeout() -> void:
 func _on_hurt_box_component_hurt_body(body: Node2D, damage: float) -> void:
     if (body.is_in_group("enemies")):
         body.queue_free()
+        if(destroy_on_hit):
+            queue_free()

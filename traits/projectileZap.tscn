@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://b2u66xa2rrt58"]
+
+[ext_resource type="Script" uid="uid://8hm1g75fx00r" path="res://traits/projectile_zap.gd" id="1_qqbiv"]
+[ext_resource type="Texture2D" uid="uid://jm4emo7kt814" path="res://assets/poderzin.png" id="2_pcl2s"]
+[ext_resource type="Script" uid="uid://djmqb2cpcmfek" path="res://components/velocity_component.gd" id="3_mvqps"]
+[ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box_component.tscn" id="4_sls52"]
+[ext_resource type="PackedScene" uid="uid://8vfq3sh7p24k" path="res://effects/shaking_lightning_effect.tscn" id="5_m4yts"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sxmqc"]
+radius = 11.0114
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4mxer"]
+radius = 23.0054
+
+[sub_resource type="GDScript" id="GDScript_7c74f"]
+
+[node name="ProjectileZap" type="Area2D"]
+script = ExtResource("1_qqbiv")
+max_variation = 1.0
+speed = 600.0
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pcl2s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("CircleShape2D_sxmqc")
+
+[node name="VelocityComponent" type="Node" parent="."]
+script = ExtResource("3_mvqps")
+velocity_limit = 450.0
+acceleration = 30000.0
+dynamic_friction = 0.0
+static_friction = 0.0
+metadata/_custom_type_script = "uid://djmqb2cpcmfek"
+
+[node name="Life" type="Timer" parent="."]
+wait_time = 1.336
+autostart = true
+
+[node name="HurtBoxComponent" parent="." instance=ExtResource("4_sls52")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(0, 0.5)
+shape = SubResource("CircleShape2D_4mxer")
+debug_color = Color(1, 0, 0, 0.392157)
+
+[node name="ShakingLightningEffect" parent="." instance=ExtResource("5_m4yts")]
+script = SubResource("GDScript_7c74f")
+
+[node name="ChangeDirectionTimer" type="Timer" parent="."]
+wait_time = 0.205
+autostart = true
+
+[connection signal="timeout" from="Life" to="." method="_on_life_timeout"]
+[connection signal="hurt_body" from="HurtBoxComponent" to="." method="_on_hurt_box_component_hurt_body"]
+[connection signal="timeout" from="ChangeDirectionTimer" to="." method="_on_change_direction_timer_timeout"]

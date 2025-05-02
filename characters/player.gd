@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var c_velocity : VelocityComponent = $VelocityComponent
 @onready var c_health : HealthComponent = $HealthComponent
 @onready var n_sprite : Sprite2D = $Sprite2D
-@onready var scn_projectile = preload("res://traits/projectile.tscn")
+@onready var scn_projectile = preload("res://traits/projectileZap.tscn")
 @onready var scn_shockwave = preload("res://traits/shockwave.tscn")
 
 
@@ -46,7 +46,7 @@ func _spawn_projectile() -> void:
     else:
         projectile_instance.m_spawn_direction = velocity.normalized()
     projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
-    projectile_instance.speed = max(velocity.length() * 3, 300)
+    #projectile_instance.speed = max(velocity.length() * 3, 300)
     owner.add_child(projectile_instance)
 
 
