@@ -1,18 +1,45 @@
-[gd_scene load_steps=9 format=3 uid="uid://b2u66xa2rrt58"]
+[gd_scene load_steps=11 format=3 uid="uid://b2u66xa2rrt58"]
 
 [ext_resource type="Script" uid="uid://8hm1g75fx00r" path="res://traits/projectile_zap.gd" id="1_qqbiv"]
-[ext_resource type="Texture2D" uid="uid://jm4emo7kt814" path="res://assets/poderzin.png" id="2_pcl2s"]
+[ext_resource type="Texture2D" uid="uid://cgcr7jhfjf11j" path="res://assets/spermatozoa-sheet.png" id="2_4t2lt"]
 [ext_resource type="Script" uid="uid://djmqb2cpcmfek" path="res://components/velocity_component.gd" id="3_mvqps"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box_component.tscn" id="4_sls52"]
-[ext_resource type="PackedScene" uid="uid://8vfq3sh7p24k" path="res://effects/shaking_lightning_effect.tscn" id="5_m4yts"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_sxmqc"]
-radius = 11.0114
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4t2lt"]
+radius = 3.0
+height = 22.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_4mxer"]
-radius = 23.0054
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sqlp"]
+atlas = ExtResource("2_4t2lt")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="GDScript" id="GDScript_7c74f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_81n3b"]
+atlas = ExtResource("2_4t2lt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0rwy"]
+atlas = ExtResource("2_4t2lt")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m0v3k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sqlp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_81n3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0rwy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_24bwy"]
+radius = 4.5
 
 [node name="ProjectileZap" type="Area2D"]
 script = ExtResource("1_qqbiv")
@@ -20,12 +47,13 @@ max_variation = 1.0
 speed = 600.0
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_pcl2s")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
-shape = SubResource("CircleShape2D_sxmqc")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_4t2lt")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_m0v3k")
+autoplay = "default"
 
 [node name="VelocityComponent" type="Node" parent="."]
 script = ExtResource("3_mvqps")
@@ -43,11 +71,9 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, 0.5)
-shape = SubResource("CircleShape2D_4mxer")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_24bwy")
 debug_color = Color(1, 0, 0, 0.392157)
-
-[node name="ShakingLightningEffect" parent="." instance=ExtResource("5_m4yts")]
-script = SubResource("GDScript_7c74f")
 
 [node name="ChangeDirectionTimer" type="Timer" parent="."]
 wait_time = 0.205
