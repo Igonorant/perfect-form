@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://usk612w00ywc"]
 
 [ext_resource type="Script" uid="uid://rdgwylv1tlvk" path="res://test_stuff/shockwave.gd" id="1_gw7l2"]
-[ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box_component.tscn" id="4_bm2hk"]
+[ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="4_bm2hk"]
 [ext_resource type="PackedScene" uid="uid://8vfq3sh7p24k" path="res://effects/shaking_lightning_effect.tscn" id="5_gp41d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4mxer"]
