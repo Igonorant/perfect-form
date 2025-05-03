@@ -6,9 +6,9 @@ extends CharacterBody2D
 @onready var n_invulnerability_timer: Timer = $InvulnerabilityTimer
 @onready var n_blinking_animation: BlinkingComponent = $BlinkingComponent
 @onready var n_sprite: Sprite2D = $Sprite2D
-@onready var scn_projectile = preload("res://traits/projectile_zap.tscn")
-@onready var scn_shockwave = preload("res://traits/shockwave.tscn")
-@onready var scn_projectile_burst = preload("res://traits/projectile_burst.tscn")
+@onready var scn_projectile = preload("res://test_stuff/projectile_zap.tscn")
+@onready var scn_shockwave = preload("res://test_stuff/shockwave.tscn")
+@onready var scn_projectile_burst = preload("res://test_stuff/projectile_burst.tscn")
 
 
 var m_player_input_direction: Vector2 # Player inputs direction

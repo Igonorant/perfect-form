@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctbnto7f4ovr7"]
 
-[ext_resource type="Script" uid="uid://q5868nlellyn" path="res://traits/projectile.gd" id="1_dgwo2"]
+[ext_resource type="Script" uid="uid://q5868nlellyn" path="res://test_stuff/projectile.gd" id="1_dgwo2"]
 [ext_resource type="Texture2D" uid="uid://jm4emo7kt814" path="res://assets/poderzin.png" id="1_qxf0c"]
 [ext_resource type="PackedScene" uid="uid://8vfq3sh7p24k" path="res://effects/shaking_lightning_effect.tscn" id="2_7c74f"]
 [ext_resource type="Script" uid="uid://djmqb2cpcmfek" path="res://components/velocity_component.gd" id="2_dgwo2"]
