@@ -34,28 +34,33 @@ func _calculate_direction() -> void:
 
 func _handle_inputs() -> void:
     if Input.is_action_just_pressed("atk_q"):
-        _spawn_projectile()
+        _spawn_projectile(1)
     if Input.is_action_just_pressed("atk_e"):
         _spawn_shockwave()
     if Input.is_action_just_pressed("atk_w"):
-        _spawn_projectile_burst()
+        _spawn_projectile_burst(5)
+    if Input.is_action_just_pressed("atk_r"):
+        _spawn_projectile(10)
 
 
-func _spawn_projectile_burst() -> void:
-    var projectile_instance: ProjectileBurst = scn_projectile_burst.instantiate()
-    projectile_instance.m_spawn_direction = m_player_last_input_direction.normalized()
-    projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
-    owner.add_child(projectile_instance)
+func _spawn_projectile_burst(amount: int) -> void:
+    for i in range(amount):
+        var projectile_instance: ProjectileBurst = scn_projectile_burst.instantiate()
+        projectile_instance.m_spawn_direction = m_player_last_input_direction
+        projectile_instance.m_spawn_direction = projectile_instance.m_spawn_direction.rotated(randf_range(-PI / 12, PI / 12))
+        projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
+        owner.add_child(projectile_instance)
 
-func _spawn_projectile() -> void:
-    var projectile_instance: Projectile = scn_projectile.instantiate()
-    if (velocity.is_zero_approx()):
-        projectile_instance.m_spawn_direction = m_player_last_input_direction.normalized()
-    else:
-        projectile_instance.m_spawn_direction = velocity.normalized()
-    projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
-    #projectile_instance.speed = max(velocity.length() * 3, 300)
-    owner.add_child(projectile_instance)
+func _spawn_projectile(amount: int) -> void:
+    for i in range(amount):
+        var projectile_instance: Projectile = scn_projectile.instantiate()
+        if (velocity.is_zero_approx()):
+            projectile_instance.m_spawn_direction = m_player_last_input_direction.normalized()
+        else:
+            projectile_instance.m_spawn_direction = velocity.normalized()
+        projectile_instance.m_spawn_direction = projectile_instance.m_spawn_direction.rotated(randf_range(-PI / 6, PI / 6))
+        projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
+        owner.add_child(projectile_instance)
 
 func _spawn_shockwave() -> void:
     var shockwave_instance: Shockwave = scn_shockwave.instantiate()
