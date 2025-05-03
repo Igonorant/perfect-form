@@ -6,6 +6,7 @@ extends CharacterBody2D
 @onready var n_sprite: Sprite2D = $Sprite2D
 @onready var scn_projectile = preload("res://traits/projectile_zap.tscn")
 @onready var scn_shockwave = preload("res://traits/shockwave.tscn")
+@onready var scn_projectile_burst = preload("res://traits/projectile_burst.tscn")
 
 
 var m_player_input_direction: Vector2 # Player inputs direction
@@ -37,7 +38,15 @@ func _handle_inputs() -> void:
         _spawn_projectile()
     if Input.is_action_just_pressed("atk_e"):
         _spawn_shockwave()
+    if Input.is_action_just_pressed("atk_w"):
+        _spawn_projectile_burst()
 
+
+func _spawn_projectile_burst() -> void:
+    var projectile_instance: ProjectileBurst = scn_projectile_burst.instantiate()
+    projectile_instance.m_spawn_direction = m_player_last_input_direction.normalized()
+    projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
+    owner.add_child(projectile_instance)
 
 func _spawn_projectile() -> void:
     var projectile_instance: Projectile = scn_projectile.instantiate()
