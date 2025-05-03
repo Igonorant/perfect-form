@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvl0gxgska63"]
+
+[ext_resource type="Script" uid="uid://cx5drwlhdu3xr" path="res://components/blinking_component.gd" id="1_r6rc0"]
+
+[node name="BlinkingComponent" type="Node"]
+script = ExtResource("1_r6rc0")
+
+[node name="IntervalTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="IntervalTimer" to="." method="_on_interval_timer_timeout"]

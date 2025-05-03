@@ -12,7 +12,7 @@ var state: State = State.STARTING
 func _ready():
     super()
     sprite.animation = "start"
-    sprite.play()
+    sprite.play("start")
     sprite.animation_finished.connect(_on_animation_finished)
 
 func _on_animation_finished():

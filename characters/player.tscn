@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://cqtr5u7m31ils"]
+[gd_scene load_steps=8 format=3 uid="uid://cqtr5u7m31ils"]
 
 [ext_resource type="Script" uid="uid://cwclpfp5ha3gj" path="res://characters/player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://b1rle3pptumof" path="res://assets/spritetopus.png" id="2_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://dahnogck2kxfx" path="res://components/velocity_component.tscn" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://b6o5k202plrx7" path="res://components/health_component.tscn" id="4_x0jl3"]
+[ext_resource type="PackedScene" uid="uid://cvl0gxgska63" path="res://components/blinking_component.tscn" id="5_evndh"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hqtel"]
 radius = 21.2191
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_evndh"]
+blend_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
@@ -23,3 +27,10 @@ shape = SubResource("CircleShape2D_hqtel")
 [node name="VelocityComponent" parent="." instance=ExtResource("3_i3pqv")]
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_x0jl3")]
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="BlinkingComponent" parent="." node_paths=PackedStringArray("item") instance=ExtResource("5_evndh")]
+item = NodePath("../Sprite2D")
+material = SubResource("CanvasItemMaterial_evndh")
