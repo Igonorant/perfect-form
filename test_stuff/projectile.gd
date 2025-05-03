@@ -17,8 +17,7 @@ func _ready() -> void:
     position = m_spawn_position
     rotation = m_spawn_direction.angle()
     c_velocity.set_direction(m_spawn_direction)
-    c_velocity.velocity_limit = speed
-    c_velocity.m_velocity = m_spawn_direction.normalized() * speed
+    c_velocity.set_velocity(m_spawn_direction.normalized() * speed)
     m_effect = get_node_or_null("ShakingLightningEffect")
     if (m_effect):
         m_effect.rotation = randf_range(0.0, TAU)

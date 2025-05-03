@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="VelocityResource" load_steps=2 format=3 uid="uid://bjnwwcpjr4p2s"]
+
+[ext_resource type="Script" uid="uid://lbar7pylkoib" path="res://components/velocity/velocity_resource.gd" id="1_1tdhp"]
+
+[resource]
+script = ExtResource("1_1tdhp")
+metadata/_custom_type_script = "uid://lbar7pylkoib"
