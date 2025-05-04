@@ -1,21 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpg3ryjkfw4dx"]
+[gd_scene load_steps=7 format=3 uid="uid://dpg3ryjkfw4dx"]
 
 [ext_resource type="Script" uid="uid://bwscga8f2qkix" path="res://characters/enemy.gd" id="1_1ohc2"]
 [ext_resource type="Texture2D" uid="uid://ta6vh22jk3wy" path="res://assets/placeholder_enemy.png" id="2_1ohc2"]
 [ext_resource type="PackedScene" uid="uid://dahnogck2kxfx" path="res://components/velocity/velocity_component.tscn" id="2_nhupr"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="4_ggbst"]
-[ext_resource type="Script" uid="uid://lbar7pylkoib" path="res://components/velocity/velocity_resource.gd" id="4_toq4n"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhupr"]
 radius = 12.1655
-
-[sub_resource type="Resource" id="Resource_u8tuc"]
-script = ExtResource("4_toq4n")
-max_speed = 100.0
-acceleration = 500.0
-dynamic_friction = 0.0
-static_friction = 0.0
-metadata/_custom_type_script = "uid://lbar7pylkoib"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_toq4n"]
 radius = 13.1529
@@ -32,7 +23,10 @@ region_rect = Rect2(42, 126, 56, 56)
 shape = SubResource("CircleShape2D_nhupr")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_nhupr")]
-rsrc = SubResource("Resource_u8tuc")
+velocity_limit = 50.0
+acceleration = 500.0
+dynamic_friction = 2.0
+static_friction = 100.0
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("4_ggbst")]
 damage = 10.0
