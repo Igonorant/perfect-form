@@ -27,7 +27,6 @@ shape = SubResource("CircleShape2D_sxmqc")
 
 [node name="VelocityComponent" type="Node" parent="."]
 script = ExtResource("2_dgwo2")
-acceleration = 0.0
 metadata/_custom_type_script = "uid://djmqb2cpcmfek"
 
 [node name="Life" type="Timer" parent="."]

@@ -27,7 +27,6 @@ func start_blinking(time: float) -> void:
 
     m_blinking_remaining_time = time
     m_blinking_timer.start()
-    print("Blinking animation started for ", time, " seconds.")
 
 func _on_interval_timer_timeout() -> void:
     m_blinking_remaining_time -= m_blinking_timer.wait_time

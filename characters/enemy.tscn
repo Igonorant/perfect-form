@@ -23,10 +23,9 @@ region_rect = Rect2(42, 126, 56, 56)
 shape = SubResource("CircleShape2D_nhupr")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("2_nhupr")]
-velocity_limit = 50.0
-acceleration = 500.0
-dynamic_friction = 2.0
-static_friction = 100.0
+speed_limit = 100.0
+acceleration_time = 1.0
+deceleration_time = 3.0
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("4_ggbst")]
 damage = 10.0

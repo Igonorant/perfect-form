@@ -46,21 +46,18 @@ func _handle_inputs() -> void:
 func _spawn_projectile_burst(amount: int) -> void:
     for i in range(amount):
         var projectile_instance: ProjectileBurst = scn_projectile_burst.instantiate()
-        projectile_instance.m_spawn_direction = m_player_last_input_direction
-        projectile_instance.m_spawn_direction = projectile_instance.m_spawn_direction.rotated(randf_range(-PI / 12, PI / 12))
-        projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
+        projectile_instance.global_position = global_position
+        var direction = m_player_last_input_direction if m_player_input_direction.is_zero_approx() else m_player_input_direction
         owner.add_child(projectile_instance)
+        projectile_instance.set_direction(direction.rotated(randf_range(-PI / 6, PI / 6)))
 
 func _spawn_projectile(amount: int) -> void:
     for i in range(amount):
         var projectile_instance: Projectile = scn_projectile.instantiate()
-        if (velocity.is_zero_approx()):
-            projectile_instance.m_spawn_direction = m_player_last_input_direction.normalized()
-        else:
-            projectile_instance.m_spawn_direction = velocity.normalized()
-        projectile_instance.m_spawn_direction = projectile_instance.m_spawn_direction.rotated(randf_range(-PI / 6, PI / 6))
-        projectile_instance.m_spawn_position = position + projectile_instance.m_spawn_direction * 20
+        projectile_instance.global_position = global_position
+        var direction = m_player_last_input_direction if m_player_input_direction.is_zero_approx() else m_player_input_direction
         owner.add_child(projectile_instance)
+        projectile_instance.set_direction(direction.rotated(randf_range(-PI / 6, PI / 6)))
 
 func _spawn_shockwave() -> void:
     var shockwave_instance: Shockwave = scn_shockwave.instantiate()
@@ -70,7 +67,7 @@ func _spawn_shockwave() -> void:
     owner.add_child(shockwave_instance)
 
 func _move() -> void:
-    c_velocity.set_direction(m_player_input_direction)
+    c_velocity.set_acceleration_direction(m_player_input_direction)
     velocity = c_velocity.get_velocity()
     move_and_slide()
 

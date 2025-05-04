@@ -9,7 +9,7 @@ func _ready() -> void:
     pass
 
 func _physics_process(_delta: float) -> void:
-    c_velocity.set_direction(m_target.global_position - global_position)
+    c_velocity.set_acceleration_direction(m_target.global_position - global_position)
     velocity = c_velocity.get_velocity()
     move_and_slide()
 

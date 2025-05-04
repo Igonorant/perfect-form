@@ -25,10 +25,13 @@ position = Vector2(1.5, 1)
 shape = SubResource("CircleShape2D_hqtel")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_i3pqv")]
+acceleration_time = 0.2
+deceleration_time = 0.4
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_x0jl3")]
 
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="BlinkingComponent" parent="." node_paths=PackedStringArray("item") instance=ExtResource("5_evndh")]
