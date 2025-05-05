@@ -1,3 +1,4 @@
+@icon("res://assets/icons/damage.png")
 class_name Damage
 extends Resource
 
