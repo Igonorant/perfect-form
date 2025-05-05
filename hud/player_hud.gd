@@ -5,7 +5,7 @@ extends Node
 @export var player: Player
 
 @onready var health_bar = $TopLeftHUD/HealthBar
-@onready var player_health_component = player.c_health
+@onready var player_health_component = player._health
 
 func _ready() -> void:
     health_bar.value = health_bar.max_value
