@@ -39,7 +39,7 @@ shape = SubResource("WorldBoundaryShape2D_h0wof")
 position = Vector2(662, 353)
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 2.0
 autostart = true
 
 [node name="PlayerHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_epw2v")]

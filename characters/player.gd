@@ -6,9 +6,13 @@ extends CharacterBody2D
 @onready var _invulnerability: InvulnerabilityComponent = %InvulnerabilityComponent
 @onready var _sprite: Sprite2D = $Sprite2D
 
-@onready var scn_projectile: PackedScene = preload("res://test_stuff/projectile_zap.tscn")
-@onready var scn_shockwave: PackedScene = preload("res://test_stuff/shockwave.tscn")
-@onready var scn_projectile_burst: PackedScene = preload("res://test_stuff/projectile_burst.tscn")
+# @onready var scn_projectile: PackedScene = preload("res://test_stuff/projectile_zap.tscn")
+# @onready var scn_shockwave: PackedScene = preload("res://test_stuff/shockwave.tscn")
+# @onready var scn_projectile_burst: PackedScene = preload("res://test_stuff/projectile_burst.tscn")
+
+@export var q_press_trait: PackedScene = null
+@export var w_press_trait: PackedScene = null
+@export var e_press_trait: PackedScene = null
 
 
 var _player_input_direction: Vector2 # Player inputs direction
@@ -33,38 +37,28 @@ func _calculate_direction() -> void:
         _player_last_input_direction = _player_input_direction
 
 func _handle_inputs() -> void:
-    if Input.is_action_just_pressed("atk_q"):
-        _spawn_projectile(1)
-    if Input.is_action_just_pressed("atk_e"):
-        _spawn_shockwave()
-    if Input.is_action_just_pressed("atk_w"):
-        _spawn_projectile_burst(5)
-    if Input.is_action_just_pressed("atk_r"):
-        _spawn_projectile(10)
+    if Input.is_action_just_pressed("atk_q") and q_press_trait != null:
+        _spawn_active_trait(q_press_trait)
+    if Input.is_action_just_pressed("atk_e") and e_press_trait != null:
+        _spawn_active_trait(e_press_trait)
+    if Input.is_action_just_pressed("atk_w") and w_press_trait != null:
+        _spawn_active_trait(w_press_trait)
 
 
-func _spawn_projectile_burst(amount: int) -> void:
-    for i in range(amount):
-        var projectile_instance: ProjectileBurst = scn_projectile_burst.instantiate()
-        projectile_instance.global_position = global_position
-        var direction = _player_last_input_direction if _player_input_direction.is_zero_approx() else _player_input_direction
-        owner.add_child(projectile_instance)
-        projectile_instance.set_direction(direction.rotated(randf_range(-PI / 6, PI / 6)))
+func _spawn_active_trait(active_trait: PackedScene) -> void:
+    # Create a new instance of the active trait
+    var instance: ActiveTrait = active_trait.instantiate()
 
-func _spawn_projectile(amount: int) -> void:
-    for i in range(amount):
-        var projectile_instance: Projectile = scn_projectile.instantiate()
-        projectile_instance.global_position = global_position
-        var direction = _player_last_input_direction if _player_input_direction.is_zero_approx() else _player_input_direction
-        owner.add_child(projectile_instance)
-        projectile_instance.set_direction(direction.rotated(randf_range(-PI / 6, PI / 6)))
+    # Set the global starting position of the active trait
+    instance.global_position = global_position
 
-func _spawn_shockwave() -> void:
-    var shockwave_instance: Shockwave = scn_shockwave.instantiate()
-    shockwave_instance.m_spawn_position = position
-    shockwave_instance.m_spawn_rotation = randf_range(0.0, TAU)
-    shockwave_instance.set_spawner(self)
-    owner.add_child(shockwave_instance)
+    # Set the direction of the active trait
+    var direction = _player_last_input_direction if _player_input_direction.is_zero_approx() else _player_input_direction
+    instance.set_direction(direction)
+
+    # Add to tree
+    owner.add_child(instance)
+
 
 func _move() -> void:
     _velocity.set_acceleration_direction(_player_input_direction)

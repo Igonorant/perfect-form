@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cqtr5u7m31ils"]
+[gd_scene load_steps=8 format=3 uid="uid://cqtr5u7m31ils"]
 
 [ext_resource type="Script" uid="uid://cwclpfp5ha3gj" path="res://characters/player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://b80u6558u77jj" path="res://genome/active_traits/porcupine_quill.tscn" id="2_h1q25"]
 [ext_resource type="Texture2D" uid="uid://b1rle3pptumof" path="res://assets/spritetopus.png" id="2_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://dahnogck2kxfx" path="res://components/velocity/velocity_component.tscn" id="3_i3pqv"]
 [ext_resource type="PackedScene" uid="uid://b6o5k202plrx7" path="res://components/health/health_component.tscn" id="4_x0jl3"]
@@ -14,6 +15,7 @@ collision_layer = 2
 collision_mask = 21
 motion_mode = 1
 script = ExtResource("1_onrkg")
+q_press_trait = ExtResource("2_h1q25")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
