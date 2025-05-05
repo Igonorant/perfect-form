@@ -1,20 +1,23 @@
 class_name Enemy
 extends CharacterBody2D
 
-@onready var c_velocity: VelocityComponent = $VelocityComponent
+@onready var _velocity: VelocityComponent = %VelocityComponent
+@onready var _health: HealthComponent = %HealthComponent
 
-var m_target: Node2D
+var _target: Node2D
 
 func _ready() -> void:
     pass
 
 func _physics_process(_delta: float) -> void:
-    c_velocity.set_acceleration_direction(m_target.global_position - global_position)
-    velocity = c_velocity.get_velocity()
+    _velocity.set_acceleration_direction(_target.global_position - global_position)
+    velocity = _velocity.get_velocity()
     move_and_slide()
 
 func set_target(target: Node2D) -> void:
-    m_target = target
+    _target = target
 
-func get_hurt_box() -> HurtBoxComponent:
-    return $HurtBoxComponent
+func take_damage(damage: float) -> void:
+    _health.deal_damage(damage)
+    if (_health.is_depleted()):
+        queue_free()

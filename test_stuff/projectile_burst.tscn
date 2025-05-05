@@ -196,6 +196,8 @@ animations = [{
 }]
 
 [node name="ProjectileBurst" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_8vnhb")
 metadata/_edit_group_ = true
 
@@ -213,6 +215,9 @@ wait_time = 5.0
 autostart = true
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("4_fse1d")]
+collision_layer = 8
+collision_mask = 4
+damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, 0.5)
@@ -226,4 +231,3 @@ sprite_frames = SubResource("SpriteFrames_hb7be")
 animation = &"start"
 
 [connection signal="timeout" from="Life" to="." method="_on_life_timeout"]
-[connection signal="hurt_body" from="HurtBoxComponent" to="." method="_on_hurt_box_component_hurt_body"]

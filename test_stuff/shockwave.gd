@@ -19,7 +19,3 @@ func set_spawner(spawner: Node2D) -> void:
 
 func _on_life_timeout() -> void:
     queue_free()
-
-func _on_hurt_box_component_hurt_body(body: Node2D, _damage: float) -> void:
-    if (body.is_in_group("enemies")):
-        body.queue_free()

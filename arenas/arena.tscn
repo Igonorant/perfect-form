@@ -19,6 +19,7 @@ normal = Vector2(-1, 0)
 script = ExtResource("1_erld0")
 
 [node name="Border" type="StaticBody2D" parent="."]
+collision_mask = 7
 
 [node name="Top" type="CollisionShape2D" parent="Border"]
 shape = SubResource("WorldBoundaryShape2D_ubfh8")
@@ -38,7 +39,7 @@ shape = SubResource("WorldBoundaryShape2D_h0wof")
 position = Vector2(662, 353)
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
-wait_time = 0.15
+wait_time = 0.5
 autostart = true
 
 [node name="PlayerHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_epw2v")]

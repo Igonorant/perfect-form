@@ -31,7 +31,7 @@ func _physics_process(_delta: float) -> void:
         _health_bar.set_position(_get_health_bar_position())
 
 func _get_health_bar_position() -> Vector2:
-    return _parent.get_global_position() + Vector2(-24, -48)
+    return _parent.get_global_position() + Vector2(-24, -36)
 
 func deal_damage(damage: float) -> void:
     _current_health -= damage
@@ -50,3 +50,6 @@ func heal(amount: float) -> void:
 
 func get_percentage_health() -> float:
     return _current_health / max_health
+
+func is_depleted() -> bool:
+    return _current_health <= 0.0

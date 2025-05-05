@@ -13,6 +13,8 @@ radius = 21.2191
 blend_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 21
 motion_mode = 1
 script = ExtResource("1_onrkg")
 metadata/_edit_group_ = true

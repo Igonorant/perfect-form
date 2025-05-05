@@ -42,6 +42,8 @@ animations = [{
 radius = 4.5
 
 [node name="ProjectileZap" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_qqbiv")
 max_variation = 1.0
 metadata/_edit_group_ = true
@@ -64,6 +66,9 @@ wait_time = 1.336
 autostart = true
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("4_sls52")]
+collision_layer = 8
+collision_mask = 4
+damage = 5.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 position = Vector2(0, 0.5)
@@ -76,5 +81,4 @@ wait_time = 0.205
 autostart = true
 
 [connection signal="timeout" from="Life" to="." method="_on_life_timeout"]
-[connection signal="hurt_body" from="HurtBoxComponent" to="." method="_on_hurt_box_component_hurt_body"]
 [connection signal="timeout" from="ChangeDirectionTimer" to="." method="_on_change_direction_timer_timeout"]
