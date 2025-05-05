@@ -29,6 +29,7 @@ acceleration_time = 0.2
 deceleration_time = 0.4
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_x0jl3")]
+add_health_bar = false
 
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
 wait_time = 0.5

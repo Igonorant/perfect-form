@@ -3,26 +3,50 @@ class_name HealthComponent
 extends Node
 
 @export var max_health: float = 100.0
+@export var add_health_bar: bool = true
 
-var m_current_health: float
+@onready var _current_health: float = max_health
+@onready var _health_bar: ProgressBar = %HealthBar
+@onready var _parent: Node = get_parent()
 
 signal health_depleted
 signal health_changed
 
 func _ready() -> void:
-    m_current_health = max_health
+    if add_health_bar:
+        _configure_health_bar()
+    else:
+        _health_bar.queue_free()
+
+func _configure_health_bar() -> void:
+    _health_bar.min_value = 0.0
+    _health_bar.max_value = max_health
+    _health_bar.value = _current_health
+
+    _health_bar.set_size(Vector2(48, 8))
+    _health_bar.set_position(_get_health_bar_position())
+
+func _physics_process(_delta: float) -> void:
+    if _health_bar:
+        _health_bar.set_position(_get_health_bar_position())
+
+func _get_health_bar_position() -> Vector2:
+    return _parent.get_global_position() + Vector2(-24, -48)
 
 func deal_damage(damage: float) -> void:
-    m_current_health -= damage
+    _current_health -= damage
+    if (_health_bar): _health_bar.value = _current_health
     health_changed.emit()
-    if (m_current_health <= 0.0):
-        m_current_health = 0.0
+    if (_current_health <= 0.0):
+        _current_health = 0.0
+        if (_health_bar): _health_bar.queue_free()
         health_depleted.emit()
 
 func heal(amount: float) -> void:
-    if (m_current_health < max_health):
-        m_current_health = min(max_health, m_current_health + amount)
+    if (_current_health < max_health):
+        _current_health = min(max_health, _current_health + amount)
+        if (_health_bar): _health_bar.value = _current_health
         health_changed.emit()
 
 func get_percentage_health() -> float:
-    return m_current_health / max_health
+    return _current_health / max_health
