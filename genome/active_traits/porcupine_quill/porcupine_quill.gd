@@ -55,4 +55,6 @@ func _calculate_attached_offset() -> void:
     if collision_shape:
         var body_shape_size := collision_shape.shape.get_rect().size
         var hurt_box_shape_size := _hurt_box_collision_shape.shape.get_rect().size
+        # Half of the body shape size and 0.35 of the quill size
+        # (0.5 would make all the spike to be outside of the body, so 0.35 makes 15% of the quill to be inside the body)
         _attached_offset = - _direction * body_shape_size * 0.5 - _direction * hurt_box_shape_size.y * 0.35
