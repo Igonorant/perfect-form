@@ -1,10 +1,9 @@
 class_name Player
 extends CharacterBody2D
 
-@onready var _velocity: VelocityComponent = $VelocityComponent
-@onready var _health: HealthComponent = $HealthComponent
-@onready var _invulnerability_timer: Timer = $InvulnerabilityTimer
-@onready var _blinking_animation: BlinkingComponent = $BlinkingComponent
+@onready var _velocity: VelocityComponent = %VelocityComponent
+@onready var _health: HealthComponent = %HealthComponent
+@onready var _invulnerability: InvulnerabilityComponent = %InvulnerabilityComponent
 @onready var _sprite: Sprite2D = $Sprite2D
 
 @onready var scn_projectile: PackedScene = preload("res://test_stuff/projectile_zap.tscn")
@@ -81,7 +80,7 @@ func _update_sprite_direction() -> void:
         _sprite.flip_h = true
 
 func take_damage(amount: float) -> void:
-    if (_invulnerability_timer.is_stopped()):
-        _health.deal_damage(amount)
-        _invulnerability_timer.start()
-        _blinking_animation.start_blinking(_invulnerability_timer.wait_time)
+    if (_invulnerability.is_active()):
+        return
+    _health.deal_damage(amount)
+    _invulnerability.activate()
