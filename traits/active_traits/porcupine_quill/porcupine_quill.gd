@@ -20,11 +20,17 @@ func set_spawn_info(spawn_info: SpawnInfo, _friendly: bool) -> void:
     global_position = spawn_info.spawn_position
     _direction = spawn_info.spawn_direction.normalized()
 
-func increment_direction(direction_increment: Vector2) -> void:
-    _direction = (_direction + direction_increment).normalized()
-
 func connect_on_body_hurted(callable: Callable) -> void:
     _hurt_box.body_hurted.connect(callable)
+
+func get_hurtbox() -> HurtBoxComponent:
+    return _hurt_box
+
+func set_direction(direction: Vector2) -> void:
+    _direction = direction
+
+func get_direction() -> Vector2:
+    return _direction
 
 ##### END INTERFACE IMPLEMENTATION #####
 
