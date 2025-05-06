@@ -13,14 +13,20 @@ var _attached_body: Node2D = null
 var _attached_rotation_variation: float = PI / 12
 var _attached_offset: Vector2 = Vector2.ZERO
 
+##### BEGIN INTERFACE IMPLEMENTATION #####
+
 func set_spawn_info(spawn_info: SpawnInfo, _friendly: bool) -> void:
     # TODO: update collision mask of hurt box based on friendly variable
     global_position = spawn_info.spawn_position
-    _direction = spawn_info.spawn_direction
+    _direction = spawn_info.spawn_direction.normalized()
 
+func increment_direction(direction_increment: Vector2) -> void:
+    _direction = (_direction + direction_increment).normalized()
+
+##### END INTERFACE IMPLEMENTATION #####
 
 func _ready() -> void:
-    assert(!_direction.is_zero_approx())
+    assert(!_direction.is_zero_approx() and _direction.is_normalized())
     _velocity.set_acceleration_direction(_direction)
     rotation = _direction.angle()
     z_index = -1

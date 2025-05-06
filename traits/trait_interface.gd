@@ -4,3 +4,6 @@ extends Node2D
 
 func set_spawn_info(_spawn_info: SpawnInfo, _friendly: bool) -> void:
     pass
+
+func increment_direction(_direction_increment: Vector2) -> void:
+    pass
