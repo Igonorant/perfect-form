@@ -11,5 +11,5 @@ enum DamageType {
     POISON
 }
 
-@export var damage: float = 0.0
+@export var amount: float = 0.0
 @export var type: DamageType = DamageType.NONE

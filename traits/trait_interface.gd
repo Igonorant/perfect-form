@@ -1,0 +1,6 @@
+@icon("res://assets/icons/trait.png")
+class_name TraitInterface
+extends Node2D
+
+func set_spawn_info(_spawn_info: SpawnInfo, _friendly: bool) -> void:
+    pass

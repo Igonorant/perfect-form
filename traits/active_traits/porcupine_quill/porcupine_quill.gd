@@ -1,27 +1,30 @@
 @icon("res://assets/traits/porcupine_quill.png")
 class_name PorcupineQuill
-extends ActiveTrait
+extends TraitInterface
 
 @onready var _velocity: VelocityComponent = %VelocityComponent
 @onready var _hurt_box: HurtBoxComponent = %HurtBoxComponent
 @onready var _life_timer: Timer = %LifeTimer
 @onready var _hurt_box_collision_shape: CollisionShape2D = %HurtBoxComponent/CollisionShape2D
 
-@export var damage: Damage
-
+var _direction: Vector2 = Vector2.ZERO
 var _is_attached: bool = false
 var _attached_body: Node2D = null
 var _attached_rotation_variation: float = PI / 12
 var _attached_offset: Vector2 = Vector2.ZERO
 
-func _ready() -> void:
+func set_spawn_info(spawn_info: SpawnInfo, _friendly: bool) -> void:
     # TODO: update collision mask of hurt box based on friendly variable
+    global_position = spawn_info.spawn_position
+    _direction = spawn_info.spawn_direction
+
+
+func _ready() -> void:
     assert(!_direction.is_zero_approx())
     _velocity.set_acceleration_direction(_direction)
     rotation = _direction.angle()
     z_index = -1
 
-    _hurt_box.damage = damage.damage
     _hurt_box.body_hurted.connect(_on_body_hurted)
 
     _life_timer.timeout.connect(_on_life_timer_timeout)

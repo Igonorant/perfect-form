@@ -37,7 +37,6 @@ unique_name_in_owner = true
 [node name="HurtBoxComponent" parent="." instance=ExtResource("4_ggbst")]
 collision_layer = 16
 collision_mask = 2
-damage = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 shape = SubResource("CircleShape2D_toq4n")
