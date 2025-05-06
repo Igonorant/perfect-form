@@ -12,6 +12,7 @@ var _is_attached: bool = false
 var _attached_body: Node2D = null
 var _attached_rotation_variation: float = PI / 12
 var _attached_offset: Vector2 = Vector2.ZERO
+var _is_forked: bool = false
 
 ##### BEGIN INTERFACE IMPLEMENTATION #####
 
@@ -19,9 +20,13 @@ func set_spawn_info(spawn_info: SpawnInfo, _friendly: bool) -> void:
     # TODO: update collision mask of hurt box based on friendly variable
     global_position = spawn_info.spawn_position
     _direction = spawn_info.spawn_direction.normalized()
+    _is_forked = spawn_info.is_forked
 
 func connect_on_body_hurted(callable: Callable) -> void:
     _hurt_box.body_hurted.connect(callable)
+
+func is_forked() -> bool:
+    return _is_forked
 
 func get_hurtbox() -> HurtBoxComponent:
     return _hurt_box

@@ -11,6 +11,9 @@ func increment_position(position_increment: Vector2) -> void:
 func connect_on_body_hurted(_callable: Callable) -> void:
     pass
 
+func is_forked() -> bool:
+    return false
+
 func get_hurtbox() -> HurtBoxComponent:
     return null
 

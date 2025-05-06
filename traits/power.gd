@@ -18,8 +18,6 @@ func spawn(spawn_info: SpawnInfo) -> void:
     for trait_modifier in trait_modifiers:
         trait_modifier.spawn_power_inject(self)
 
-    var spawned_instances: Array[TraitInterface] = []
-
     for idx in range(_trait_spawn_amount):
         # Create a new instance of the trait
         var instance: TraitInterface = trait_interface.instantiate()
@@ -29,16 +27,18 @@ func spawn(spawn_info: SpawnInfo) -> void:
         for trait_modifier in trait_modifiers:
             trait_modifier.spawn_trait_inject_before_ready(instance)
 
-        spawned_instances.append(instance)
-        add_child(instance)
+        call_deferred("add_child", instance)
+        # _finish_spawn should be called after add child to ensure _ready function has already happened
+        call_deferred("_finish_spawn", instance)
 
-    for instance in spawned_instances:
-        # Inject modification in each instance after ready
-        for trait_modifier in trait_modifiers:
-            trait_modifier.spawn_trait_inject_after_ready(instance)
+# This should be called after add child to ensure _ready function already have happened
+func _finish_spawn(instance):
+    # Inject modification in each instance after ready
+    for trait_modifier in trait_modifiers:
+        trait_modifier.spawn_trait_inject_after_ready(instance)
 
-        # Add callback to _on_body_hurted
-        instance.connect_on_body_hurted(_on_body_hurted)
+    # Add callback to _on_body_hurted
+    instance.connect_on_body_hurted(_on_body_hurted)
 
 func _physics_process(delta: float) -> void:
     for instance in get_children():
