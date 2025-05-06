@@ -7,3 +7,6 @@ func set_spawn_info(_spawn_info: SpawnInfo, _friendly: bool) -> void:
 
 func increment_direction(_direction_increment: Vector2) -> void:
     pass
+
+func connect_on_body_hurted(_callable: Callable) -> void:
+    pass

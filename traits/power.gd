@@ -5,13 +5,20 @@ extends Node
 @export var trait_modifiers: Array[TraitModifier] = []
 @export var friendly: bool = true
 
-var _trait_spawn_amount: int = 1
+var _trait_spawn_amount: int
 
+func _reset() -> void:
+    _trait_spawn_amount = 1
 
 func spawn(spawn_info: SpawnInfo) -> void:
+    # Reset status of the power to the default
+    _reset()
+
     # Inject modification in the power
     for trait_modifier in trait_modifiers:
         trait_modifier.spawn_power_inject(self)
+
+    var spawned_instances: Array[TraitInterface] = []
 
     for idx in range(_trait_spawn_amount):
         # Create a new instance of the trait
@@ -22,11 +29,23 @@ func spawn(spawn_info: SpawnInfo) -> void:
         for trait_modifier in trait_modifiers:
             trait_modifier.spawn_trait_inject_before_ready(instance)
 
+        spawned_instances.append(instance)
         add_child(instance)
 
-    for instance in get_children():
+    for instance in spawned_instances:
         # Inject modification in each instance after ready
         for trait_modifier in trait_modifiers:
             trait_modifier.spawn_trait_inject_after_ready(instance)
-            trait_modifier.physics_process_inject(instance)
-            trait_modifier.on_hurt_inject(instance)
+
+        # Add callback to _on_body_hurted
+        instance.connect_on_body_hurted(_on_body_hurted)
+
+func _physics_process(delta: float) -> void:
+    for instance in get_children():
+        # Inject modification in each instance after ready
+        for trait_modifier in trait_modifiers:
+            trait_modifier.physics_process_inject(instance, delta)
+
+func _on_body_hurted(hurter: Node2D, hurted: Node2D) -> void:
+    for trait_modifier in trait_modifiers:
+            trait_modifier.on_hurt_inject(hurter, hurted)

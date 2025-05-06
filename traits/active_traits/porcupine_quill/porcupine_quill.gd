@@ -23,6 +23,9 @@ func set_spawn_info(spawn_info: SpawnInfo, _friendly: bool) -> void:
 func increment_direction(direction_increment: Vector2) -> void:
     _direction = (_direction + direction_increment).normalized()
 
+func connect_on_body_hurted(callable: Callable) -> void:
+    _hurt_box.body_hurted.connect(callable)
+
 ##### END INTERFACE IMPLEMENTATION #####
 
 func _ready() -> void:
@@ -47,13 +50,13 @@ func _physics_process(delta: float) -> void:
 func _on_life_timer_timeout() -> void:
     queue_free()
 
-func _on_body_hurted(body: Node2D) -> void:
+func _on_body_hurted(_hurter: Node2D, hurted: Node2D) -> void:
     # Free hurt box and velocity components to stop unnecessary calculations moving forward
     _hurt_box.queue_free()
     _velocity.queue_free()
 
     # Calculate how to attach the quill to the body
-    _attached_body = body
+    _attached_body = hurted
     _is_attached = true
     _calculate_attached_offset()
     # Add some variation to make multiple quills attached to the same body look different

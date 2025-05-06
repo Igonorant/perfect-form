@@ -18,11 +18,9 @@ func spawn_trait_inject_after_ready(_trait_instance: TraitInterface) -> void:
     pass
 
 ## Injects its modifications in the physics process, like direction control of projectiles ...
-## TODO: is called during spawn right after spawn_trait_inject_after_ready, I still need to think if it is the best place to call it
-func physics_process_inject(_trait_instance: TraitInterface) -> void:
+func physics_process_inject(_trait_instance: TraitInterface, _delta: float) -> void:
     pass
 
 ## Injects its modifications when something is hurt, like forking a projectile, shatter ...
-## TODO: is called during spawn right after spawn_trait_inject_after_ready, I still need to think if it is the best place to call it
-func on_hurt_inject(_trait_instance: TraitInterface) -> void:
+func on_hurt_inject(_hurter: TraitInterface, _hurted: Node2D) -> void:
     pass

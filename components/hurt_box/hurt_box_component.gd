@@ -3,10 +3,10 @@ extends Area2D
 
 @export var damages: Array[Damage] = []
 
-signal body_hurted(body: Node2D)
+signal body_hurted(hurter: Node2D, hurted: Node2D)
 
 func _on_body_entered(body: Node2D) -> void:
     # print("@Hurtbox of : ", get_parent().name, " - Body entered: ", body.name)
     if body.has_method("take_damage"):
         body.take_damage(damages)
-        emit_signal("body_hurted", body)
+        emit_signal("body_hurted", get_parent(), body)
