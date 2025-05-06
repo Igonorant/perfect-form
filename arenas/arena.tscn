@@ -37,6 +37,7 @@ position = Vector2(1280, 720)
 shape = SubResource("WorldBoundaryShape2D_h0wof")
 
 [node name="Player" parent="." instance=ExtResource("1_qfwod")]
+unique_name_in_owner = true
 position = Vector2(662, 353)
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]

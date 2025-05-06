@@ -28,6 +28,7 @@ polygon = PackedVector2Array(-1.17211, -0.41535, 332.828, -0.41535, 333.515, 39.
 uv = PackedVector2Array(-1.17211, -0.41535, 332.828, -0.41535, 333.515, 39.4584, 296.828, 60.5846, 65.8279, 60.5846, 56.8279, 71.5846, 42.8279, 76.5846, -1.17211, 76.5846)
 
 [node name="HealthBar" type="ProgressBar" parent="TopLeftHUD"]
+unique_name_in_owner = true
 offset_left = 68.8279
 offset_top = 5.58465
 offset_right = 325.828

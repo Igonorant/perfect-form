@@ -4,12 +4,11 @@ extends Node
 
 @export var player: Player
 
-@onready var health_bar = $TopLeftHUD/HealthBar
+@onready var health_bar = %HealthBar
 @onready var player_health_component = player._health
 
 func _ready() -> void:
     health_bar.value = health_bar.max_value
-    assert(health_bar.max_value == 100.0, "Health bar max value means 100%")
     player_health_component.health_changed.connect(_update_health_bar)
 
 

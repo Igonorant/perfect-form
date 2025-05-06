@@ -1,12 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://dhxy10pkp0psr"]
+[gd_scene load_steps=9 format=3 uid="uid://dhxy10pkp0psr"]
 
 [ext_resource type="Script" uid="uid://uqasx5ljsdsr" path="res://characters/static_enemy.gd" id="1_451i7"]
 [ext_resource type="Texture2D" uid="uid://ta6vh22jk3wy" path="res://assets/placeholder_enemy.png" id="2_tkt2y"]
 [ext_resource type="PackedScene" uid="uid://b6o5k202plrx7" path="res://components/health/health_component.tscn" id="4_y8dgj"]
+[ext_resource type="Script" uid="uid://dphfi78fp4a5p" path="res://database/damage.gd" id="5_6an6s"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="5_fbtf1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhupr"]
 radius = 12.1655
+
+[sub_resource type="Resource" id="Resource_tkt2y"]
+script = ExtResource("5_6an6s")
+amount = 10.0
+type = 1
+metadata/_custom_type_script = "uid://dphfi78fp4a5p"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_toq4n"]
 radius = 13.1529
@@ -32,6 +39,7 @@ max_health = 1000.0
 [node name="HurtBoxComponent" parent="." instance=ExtResource("5_fbtf1")]
 collision_layer = 16
 collision_mask = 2
+damages = Array[ExtResource("5_6an6s")]([SubResource("Resource_tkt2y")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 unique_name_in_owner = true

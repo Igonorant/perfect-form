@@ -1,13 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpg3ryjkfw4dx"]
+[gd_scene load_steps=10 format=3 uid="uid://dpg3ryjkfw4dx"]
 
 [ext_resource type="Script" uid="uid://bwscga8f2qkix" path="res://characters/enemy.gd" id="1_1ohc2"]
 [ext_resource type="Texture2D" uid="uid://ta6vh22jk3wy" path="res://assets/placeholder_enemy.png" id="2_1ohc2"]
 [ext_resource type="PackedScene" uid="uid://dahnogck2kxfx" path="res://components/velocity/velocity_component.tscn" id="2_nhupr"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="4_ggbst"]
 [ext_resource type="PackedScene" uid="uid://b6o5k202plrx7" path="res://components/health/health_component.tscn" id="4_toq4n"]
+[ext_resource type="Script" uid="uid://dphfi78fp4a5p" path="res://database/damage.gd" id="6_u8tuc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhupr"]
 radius = 12.1655
+
+[sub_resource type="Resource" id="Resource_f76jb"]
+script = ExtResource("6_u8tuc")
+amount = 10.0
+type = 1
+metadata/_custom_type_script = "uid://dphfi78fp4a5p"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_toq4n"]
 radius = 13.1529
@@ -38,6 +45,7 @@ unique_name_in_owner = true
 [node name="HurtBoxComponent" parent="." instance=ExtResource("4_ggbst")]
 collision_layer = 16
 collision_mask = 2
+damages = Array[ExtResource("6_u8tuc")]([SubResource("Resource_f76jb")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 unique_name_in_owner = true
