@@ -41,7 +41,6 @@ unique_name_in_owner = true
 position = Vector2(662, 353)
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
-wait_time = 60.0
 autostart = true
 
 [node name="PlayerHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_epw2v")]

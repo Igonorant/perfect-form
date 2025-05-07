@@ -42,9 +42,10 @@ func _finish_spawn(instance):
 
 func _physics_process(delta: float) -> void:
     for instance in get_children():
-        # Inject modification in each instance after ready
-        for trait_modifier in trait_modifiers:
-            trait_modifier.physics_process_inject(instance, delta)
+        if (instance is TraitInterface):
+            # Inject modification in each instance after ready
+            for trait_modifier in trait_modifiers:
+                trait_modifier.physics_process_inject(instance, delta)
 
 func _on_body_hurted(hurter: Node2D, hurted: Node2D) -> void:
     for trait_modifier in trait_modifiers:

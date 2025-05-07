@@ -1,7 +1,7 @@
-class_name Multishot
+class_name MultishotRes
 extends TraitModifier
 
-var _total_number_of_projectiles: int = 2
+var _total_number_of_projectiles: int = 3
 func spawn_power_inject(power: Power) -> void:
     power._trait_spawn_amount = _total_number_of_projectiles
 

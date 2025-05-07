@@ -1,4 +1,4 @@
-class_name Forkshot
+class_name ForkshotRes
 extends TraitModifier
 
 var _power: Power
