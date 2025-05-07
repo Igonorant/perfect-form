@@ -2,7 +2,7 @@ class_name MultishotRes
 extends TraitModifier
 
 var _total_number_of_projectiles: int = 3
-func spawn_power_inject(power: Power) -> void:
+func spawn_power_inject(power: Power, _spawn_info: SpawnInfo) -> void:
     power._trait_spawn_amount = _total_number_of_projectiles
 
 var _direction_rotation_limit: float = PI / 18

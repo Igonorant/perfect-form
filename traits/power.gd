@@ -16,7 +16,7 @@ func spawn(spawn_info: SpawnInfo) -> void:
 
     # Inject modification in the power
     for trait_modifier in trait_modifiers:
-        trait_modifier.spawn_power_inject(self)
+        trait_modifier.spawn_power_inject(self, spawn_info)
 
     for idx in range(_trait_spawn_amount):
         # Create a new instance of the trait

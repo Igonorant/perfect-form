@@ -13,6 +13,7 @@ var _attached_body: Node2D = null
 var _attached_rotation_variation: float = PI / 12
 var _attached_offset: Vector2 = Vector2.ZERO
 var _is_forked: bool = false
+var _has_pierce_modifier: bool = false
 
 ##### BEGIN INTERFACE IMPLEMENTATION #####
 
@@ -21,12 +22,16 @@ func set_spawn_info(spawn_info: SpawnInfo, _friendly: bool) -> void:
     global_position = spawn_info.spawn_position
     _direction = spawn_info.spawn_direction.normalized()
     _is_forked = spawn_info.is_forked
+    _has_pierce_modifier = spawn_info.has_pierce_modifier
 
 func connect_on_body_hurted(callable: Callable) -> void:
     _hurt_box.body_hurted.connect(callable)
 
 func is_forked() -> bool:
     return _is_forked
+
+func has_pierce_modifier() -> bool:
+    return _has_pierce_modifier
 
 func get_hurtbox() -> HurtBoxComponent:
     return _hurt_box
@@ -62,6 +67,9 @@ func _on_life_timer_timeout() -> void:
     queue_free()
 
 func _on_body_hurted(_hurter: Node2D, hurted: Node2D) -> void:
+    if (_has_pierce_modifier):
+        return
+
     # Free hurt box and velocity components to stop unnecessary calculations moving forward
     _hurt_box.queue_free()
     _velocity.queue_free()

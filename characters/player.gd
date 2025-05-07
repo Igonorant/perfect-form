@@ -22,7 +22,7 @@ func _ready() -> void:
     # THIS IS TEMPORARY TEST CODE
     q_press_power = Power.new()
     q_press_power.trait_interface = load("res://traits/active_traits/porcupine_quill/porcupine_quill.tscn")
-    q_press_power.trait_modifiers = [ForkshotRes.new(q_press_power), MultishotRes.new(), ExplodeOnImpactRes.new(q_press_power)]
+    q_press_power.trait_modifiers = [ForkshotRes.new(q_press_power), MultishotRes.new(), PierceshotRes.new(), ExplodeOnImpactRes.new(q_press_power)]
     q_press_power.friendly = true
     owner.call_deferred("add_child", q_press_power)
 

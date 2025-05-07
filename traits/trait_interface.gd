@@ -14,6 +14,9 @@ func connect_on_body_hurted(_callable: Callable) -> void:
 func is_forked() -> bool:
     return false
 
+func has_pierce_modifier() -> bool:
+    return false
+
 func get_hurtbox() -> HurtBoxComponent:
     return null
 

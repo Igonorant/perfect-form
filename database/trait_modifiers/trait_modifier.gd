@@ -6,7 +6,7 @@ extends Resource
 @export var icon: Texture2D
 
 ## Injects its modifications in the power, like amount of traits to spawn, changes in trait spawn position ...
-func spawn_power_inject(_power: Power) -> void:
+func spawn_power_inject(_power: Power, _spawn_info: SpawnInfo) -> void:
     pass
 
 ## Injects its modifications in the trait instance, before calling _ready function, like more damage, increased effect ...

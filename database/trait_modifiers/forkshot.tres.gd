@@ -38,4 +38,5 @@ func on_hurt_inject(hurter: TraitInterface, hurted: Node2D) -> void:
     create_hurter.call(forked_rotation)
     create_hurter.call(-forked_rotation)
 
-    hurter.queue_free()
+    if (!hurter.has_pierce_modifier()):
+        hurter.queue_free()
