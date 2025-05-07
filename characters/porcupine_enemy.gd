@@ -10,13 +10,19 @@ extends CharacterBody2D
 @onready var _moving_timer: Timer = %MovingTimer
 @onready var _dead_timer: Timer = %DeadTimer
 
+@onready var _main_sprite: Sprite2D = %MainSprite2D
+@onready var _spikes_sprite: Sprite2D = %SpikesSprite2D
+@onready var _hurtbox_collision_shape: CollisionShape2D = $HurtBoxComponent/CollisionShape2D
+
+var _main_sprite_original_position: Vector2
+var _spikes_sprite_original_position: Vector2
+var _hurtbox_collision_shape_original_position: Vector2
+
 var _target: Node2D
 var _invulnerable: bool = false
 
-enum State {IDLE, MOVING, ATTACKING, TAKING_DAMAGE, DEAD}
-const _StateStrings := ["IDLE", "MOVING", "ATTACKING", "TAKING_DAMAGE", "DEAD"]
-var _current_state: State = State.IDLE
-var _last_state: State = State.IDLE
+enum Behavior {IDLE, MOVING, ATTACKING, TAKING_DAMAGE, DEAD}
+@onready var _fsm: StateMachine = StateMachine.new()
 
 func _ready() -> void:
     _idle_timer.timeout.connect(_on_idle_timer_timeout)
@@ -25,88 +31,152 @@ func _ready() -> void:
 
     _animation.animation_finished.connect(_on_animation_finished)
 
-    _animation.play("idle")
-    _idle_timer.start()
+    _main_sprite_original_position = _main_sprite.position
+    _spikes_sprite_original_position = _spikes_sprite.position
+    _hurtbox_collision_shape_original_position = _hurtbox_collision_shape.position
+
+    _fsm.add_state(State.new(Behavior.IDLE, "IDLE", _about_to_enter_idle, _in_state_idle, Callable()))
+    _fsm.add_state(State.new(Behavior.MOVING, "MOVING", _about_to_enter_moving, Callable(), Callable()))
+    _fsm.add_state(State.new(Behavior.ATTACKING, "ATTACKING", _about_to_enter_attacking, _in_state_attacking, Callable()))
+    _fsm.add_state(State.new(Behavior.TAKING_DAMAGE, "TAKING_DAMAGE", _about_to_enter_taking_damage, Callable(), _about_to_exit_taking_damage))
+    _fsm.add_state(State.new(Behavior.DEAD, "DEAD", _about_to_enter_dead, in_state_dead, Callable()))
+    _fsm.end_adding_states()
+    _fsm.set_state(Behavior.IDLE)
+
     _invulnerable = true
 
 func set_target(target: Node2D) -> void:
     _target = target
 
+
 func _physics_process(_delta: float) -> void:
-    match _current_state:
-        State.IDLE:
-            _handle_idle_state()
-        State.MOVING:
-            _handle_moving_state()
-        State.ATTACKING:
-            _handle_attacking_state()
-        State.TAKING_DAMAGE: pass
-        State.DEAD: return
+    match _fsm.get_state():
+        Behavior.IDLE: pass
+        Behavior.MOVING:
+            _in_state_moving_physics_process()
+        Behavior.ATTACKING: pass
+        Behavior.TAKING_DAMAGE: pass
+        Behavior.DEAD: pass
+
+    velocity = _velocity.get_velocity()
+    if (velocity.x >= 1):
+        turn_right()
+    elif (velocity.x <= -1):
+        turn_left()
+
     move_and_slide()
 
-func take_damage(damages: Array[Damage]) -> void:
-    if (_invulnerable):
-        return
-    for damage in damages:
-        _health.deal_damage(damage.amount)
-        if (_health.is_depleted()):
-            _handle_entering_dead_state()
-            return
-    _set_state(State.TAKING_DAMAGE)
-    _animation.play("taking_damage")
+func turn_left() -> void:
+    var neg_x := Vector2(-1, 1)
+    _main_sprite.flip_h = true
+    _main_sprite.position = _main_sprite_original_position * neg_x
+    _spikes_sprite.flip_h = true
+    _spikes_sprite.position = _spikes_sprite_original_position * neg_x
+    _hurtbox_collision_shape.position = _hurtbox_collision_shape_original_position * neg_x
 
-func _handle_idle_state() -> void:
+func turn_right() -> void:
+    _main_sprite.flip_h = false
+    _main_sprite.position = _main_sprite_original_position
+    _spikes_sprite.flip_h = false
+    _spikes_sprite.position = _spikes_sprite_original_position
+    _hurtbox_collision_shape.position = _hurtbox_collision_shape_original_position
+
+
+### IDLE STATE ###
+
+func _about_to_enter_idle() -> void:
     _animation.play("idle")
-    velocity = velocity.lerp(Vector2.ZERO, 0.2);
+    _idle_timer.start()
 
-func _handle_moving_state() -> void:
-    _velocity.set_acceleration_direction(_target.global_position - global_position)
-    velocity = _velocity.get_velocity()
-
-func _handle_attacking_state() -> void:
-    velocity = velocity.lerp(Vector2.ZERO, 0.2);
-
-func _attack() -> void:
-    pass
+func _in_state_idle() -> void:
+    _velocity.set_acceleration_direction(Vector2.ZERO)
 
 func _on_idle_timer_timeout() -> void:
-    _set_state(State.MOVING)
     _invulnerable = false
+    _fsm.set_state(Behavior.MOVING)
+
+
+### MOVING STATE ###
+
+func _about_to_enter_moving() -> void:
     _animation.play("moving")
     _moving_timer.start()
 
 func _on_moving_timer_timeout() -> void:
-    _set_state(State.ATTACKING)
+    _fsm.set_state(Behavior.ATTACKING)
+
+func _in_state_moving_physics_process() -> void:
+    _velocity.set_acceleration_direction(_target.global_position - global_position)
+
+### ATTACKING STATE ###
+
+func _about_to_enter_attacking() -> void:
     _animation.play("attacking")
+
+func _in_state_attacking() -> void:
+    _velocity.set_acceleration_direction(Vector2.ZERO)
     _attack()
+
+func _attack() -> void:
+    # TODO: add attacking logic here
+    pass
+
+func _on_animation_finished(anim_name: StringName) -> void:
+    match anim_name:
+        "attacking":
+            _fsm.set_state(Behavior.IDLE)
+        "taking_damage":
+            _fsm.set_state(_fsm.get_previous_state())
+
+
+### TAKING DAMAGE STATE ###
+
+func _about_to_enter_taking_damage() -> void:
+    _animation.play("taking_damage")
+
+    _velocity.set_acceleration_direction(Vector2.ZERO)
+
+    _idle_timer.paused = true
+    _moving_timer.paused = true
+
+func _about_to_exit_taking_damage() -> void:
+    _idle_timer.paused = false
+    _moving_timer.paused = false
+
+func take_damage(damages: Array[Damage]) -> void:
+    if (_invulnerable):
+        return
+
+    var took_damage: bool = false
+    for damage in damages:
+        if (!_health.is_depleted()):
+            _health.deal_damage(damage.amount)
+            took_damage = true
+
+    if (_health.is_depleted()):
+        _fsm.set_state(Behavior.DEAD)
+        _fsm.lock()
+        return
+
+    if (took_damage):
+        _fsm.set_state(Behavior.TAKING_DAMAGE)
+
+
+### DEAD STATE ###
 
 func _on_dead_timer_timeout() -> void:
     queue_free()
 
-func _handle_entering_dead_state() -> void:
+func _about_to_enter_dead() -> void:
+    _animation.play("RESET")
     _animation.play("taking_damage_fatal")
-    _velocity.queue_free()
+
+func in_state_dead() -> void:
+    _velocity.set_acceleration_direction(Vector2.ZERO)
+
     _health.queue_free()
     _hit_box.queue_free()
+
+    _idle_timer.stop()
+    _moving_timer.stop()
     _dead_timer.start()
-    _set_state(State.DEAD)
-
-func _on_animation_finished(anim_name: StringName) -> void:
-    print("_on_animation_finished -> ", anim_name)
-    match anim_name:
-        "attacking":
-            _set_state(State.IDLE)
-        "taking_damage":
-            _set_state(_last_state)
-
-func _set_state(state: State) -> void:
-    print(Time.get_ticks_msec() / 1000.0, " - (last) ", _StateStrings[_last_state], " <- (current) ", _StateStrings[_current_state], "  <- (change to) ", _StateStrings[state], ")")
-    if (_current_state != State.DEAD):
-        _last_state = _current_state
-        _current_state = state
-        match _current_state:
-            State.IDLE:
-                _idle_timer.start()
-            State.MOVING:
-                _moving_timer.start()
-    print("      - ", _StateStrings[_current_state], " (was ", _StateStrings[_last_state], ")")
