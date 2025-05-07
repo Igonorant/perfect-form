@@ -43,6 +43,7 @@ deceleration_time = 3.0
 unique_name_in_owner = true
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("4_ggbst")]
+visible = false
 collision_layer = 16
 collision_mask = 2
 damages = Array[ExtResource("6_u8tuc")]([SubResource("Resource_f76jb")])

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://b2u66xa2rrt58"]
 
 [ext_resource type="Script" uid="uid://8hm1g75fx00r" path="res://test_stuff/projectile_zap.gd" id="1_qqbiv"]
-[ext_resource type="Texture2D" uid="uid://cgcr7jhfjf11j" path="res://assets/spermatozoa-sheet.png" id="2_4t2lt"]
+[ext_resource type="Texture2D" uid="uid://cgcr7jhfjf11j" path="res://assets/spermatozoa_sheet.png" id="2_4t2lt"]
 [ext_resource type="Script" uid="uid://djmqb2cpcmfek" path="res://components/velocity/velocity_component.gd" id="3_mvqps"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="4_sls52"]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ya64u2a4h61p"
-path="res://.godot/imported/blue cell.png-9aeb44c790190274a97765df4c1e73b9.ctex"
+uid="uid://cgcr7jhfjf11j"
+path="res://.godot/imported/spermatozoa_sheet.png-f50bd0408139d3ccdec4a188ff30d0f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/blue cell.png"
-dest_files=["res://.godot/imported/blue cell.png-9aeb44c790190274a97765df4c1e73b9.ctex"]
+source_file="res://assets/spermatozoa_sheet.png"
+dest_files=["res://.godot/imported/spermatozoa_sheet.png-f50bd0408139d3ccdec4a188ff30d0f2.ctex"]
 
 [params]
 

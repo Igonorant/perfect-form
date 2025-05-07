@@ -5,7 +5,7 @@ extends Node2D
 @onready var player = $Player
 @onready var m_screen_size = get_viewport_rect().size
 
-var enemy_scene = preload("res://characters/enemy.tscn")
+var enemy_scene = preload("uid://dcgj84cbyh7gl") # Porcupine Scene
 
 func _on_spawn_enemy_timer_timeout() -> void:
     var enemy = enemy_scene.instantiate()

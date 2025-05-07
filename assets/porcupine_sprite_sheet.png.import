@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpfy3yyct3kio"
-path="res://.godot/imported/fireburst-Sheet.png-941b7a67a528fb57cc45a3d681f9e72e.ctex"
+uid="uid://c43s732x5ho1i"
+path="res://.godot/imported/porcupine_sprite_sheet.png-7ea462998c8645f7e57eb1c9c8159b2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/fireburst-Sheet.png"
-dest_files=["res://.godot/imported/fireburst-Sheet.png-941b7a67a528fb57cc45a3d681f9e72e.ctex"]
+source_file="res://assets/porcupine_sprite_sheet.png"
+dest_files=["res://.godot/imported/porcupine_sprite_sheet.png-7ea462998c8645f7e57eb1c9c8159b2e.ctex"]
 
 [params]
 
