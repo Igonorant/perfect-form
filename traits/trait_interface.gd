@@ -6,7 +6,6 @@ extends Node2D
 
 func _free_if_out_of_game_bounds() -> void:
     if (!_out_of_game_bounds.has_point(global_position)):
-        print("Freeing node: ", name)
         queue_free()
 
 func _physics_process(_delta: float) -> void:
