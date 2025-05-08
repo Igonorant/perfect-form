@@ -117,10 +117,12 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D"]
+y_sort_enabled = true
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_onrkg")
+metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_evndh")
@@ -155,4 +157,4 @@ libraries = {
 
 [node name="PowerSpawnLocation" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-17, 0)
+position = Vector2(0, -3)

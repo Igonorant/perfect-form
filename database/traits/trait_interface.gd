@@ -8,7 +8,21 @@ func _free_if_out_of_game_bounds() -> void:
     if (!_out_of_game_bounds.has_point(global_position)):
         queue_free()
 
+var _original_scale: Vector2 = Vector2.ONE
+var _original_scale_increment: Vector2 = Vector2.ONE
+func _ready() -> void:
+    _original_scale = scale
+    scale = Vector2(0.05, 0.05)
+    _original_scale_increment = (_original_scale - scale) / 10
+
+func _scale_back_to_original() -> void:
+    if (_original_scale != scale):
+        scale += _original_scale_increment
+        if (scale > _original_scale):
+            scale = _original_scale
+
 func _physics_process(_delta: float) -> void:
+    _scale_back_to_original()
     _free_if_out_of_game_bounds()
 
 func _get_collision_layer(friendly: bool) -> int:

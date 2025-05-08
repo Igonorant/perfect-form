@@ -46,10 +46,10 @@ func get_direction() -> Vector2:
 ##### END INTERFACE IMPLEMENTATION #####
 
 func _ready() -> void:
+    super ()
     assert(!_direction.is_zero_approx() and _direction.is_normalized())
     _velocity.set_acceleration_direction(_direction)
     rotation = _direction.angle()
-    z_index = -1
 
     _hurt_box.body_hurted.connect(_on_body_hurted)
 

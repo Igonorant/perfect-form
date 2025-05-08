@@ -19,6 +19,7 @@ metadata/_custom_type_script = "uid://dphfi78fp4a5p"
 radius = 13.1529
 
 [node name="StaticEnemy" type="CharacterBody2D" groups=["enemies"]]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_451i7")

@@ -8,8 +8,6 @@ extends CharacterBody2D
 @onready var _animation: AnimationPlayer = %AnimationPlayer
 @onready var _power_spawn_location: Marker2D = %PowerSpawnLocation
 
-var _power_spawn_location_original_x: float = 0.0
-
 var q_press_power: Power = null
 var w_press_power: Power = null
 var e_press_power: Power = null
@@ -23,15 +21,18 @@ func _ready() -> void:
     _player_input_direction = Vector2.ZERO
     _player_last_input_direction = Vector2.ZERO
 
-    _power_spawn_location_original_x = _power_spawn_location.position.x
-
     # THIS IS TEMPORARY TEST CODE
     q_press_power = Power.new()
     q_press_power.trait_interface = load("uid://b80u6558u77jj")
-    # q_press_power.trait_modifiers = [ForkshotRes.new(q_press_power), MultishotRes.new(), PierceshotRes.new(), ExplodeOnImpactRes.new(q_press_power)]
-    q_press_power.trait_modifiers = [ShotgunizerRes.new(), ForkshotRes.new(q_press_power)]
+    q_press_power.trait_modifiers = []
     q_press_power.friendly = true
     owner.call_deferred("add_child", q_press_power)
+
+    w_press_power = Power.new()
+    w_press_power.trait_interface = load("uid://b80u6558u77jj")
+    w_press_power.trait_modifiers = [ForkshotRes.new(q_press_power), MultishotRes.new(), PierceshotRes.new(), ExplodeOnImpactRes.new(q_press_power)]
+    w_press_power.friendly = true
+    owner.call_deferred("add_child", w_press_power)
 
 func _connect_to_hud(update_health_bar: Callable) -> void:
     _health.health_changed.connect(update_health_bar)
@@ -81,10 +82,8 @@ func _update_sprite_direction() -> void:
     if (_sprite.flip_h):
         if (_player_input_direction.x < 0.0):
             _sprite.flip_h = false
-            _power_spawn_location.position.x = _power_spawn_location_original_x
     elif (_player_input_direction.x > 0.0):
         _sprite.flip_h = true
-        _power_spawn_location.position.x = - _power_spawn_location_original_x
 
 func take_damage(damages: Array[Damage]) -> void:
     if (_invulnerability.is_active()):
