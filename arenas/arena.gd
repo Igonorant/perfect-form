@@ -10,7 +10,6 @@ var enemy_scene = preload("uid://dcgj84cbyh7gl") # Porcupine Scene
 
 func _ready() -> void:
     player_hud.connect_to_player(player)
-    print(_arena_size)
 
 func _on_spawn_enemy_timer_timeout() -> void:
     var enemy = enemy_scene.instantiate()
