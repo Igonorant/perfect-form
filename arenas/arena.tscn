@@ -19,6 +19,21 @@ normal = Vector2(-1, 0)
 [node name="Arena" type="Node2D"]
 script = ExtResource("1_erld0")
 
+[node name="BorderColor" type="ColorRect" parent="."]
+z_index = -12
+offset_left = -152.0
+offset_top = -140.0
+offset_right = 1433.0
+offset_bottom = 865.0
+color = Color(0.127749, 0.00382229, 0.0748794, 1)
+
+[node name="ArenaColor" type="ColorRect" parent="."]
+z_index = -10
+offset_top = 1.0
+offset_right = 1279.0
+offset_bottom = 720.0
+color = Color(0.242073, 0.0122584, 0.156128, 1)
+
 [node name="Border" type="StaticBody2D" parent="."]
 collision_mask = 7
 
@@ -40,20 +55,40 @@ shape = SubResource("WorldBoundaryShape2D_h0wof")
 unique_name_in_owner = true
 position = Vector2(662, 353)
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+process_callback = 0
+limit_left = -100
+limit_top = -100
+limit_right = 1380
+limit_bottom = 820
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
+editor_draw_limits = true
+
+[node name="PlayerHUD" parent="Player/Camera2D" node_paths=PackedStringArray("player") instance=ExtResource("3_epw2v")]
+unique_name_in_owner = true
+offset_left = -321.0
+offset_top = -180.0
+offset_right = -321.0
+offset_bottom = -180.0
+scale = Vector2(0.5, 0.5)
+player = NodePath("../..")
+
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
-one_shot = true
 autostart = true
 
-[node name="PlayerHUD" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_epw2v")]
-player = NodePath("../Player")
-
 [node name="Enemy" parent="." instance=ExtResource("4_huq5d")]
-position = Vector2(1093, 324)
+position = Vector2(894, 221)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_huq5d")]
-position = Vector2(1209, 184)
+position = Vector2(466, 237)
 
 [node name="Enemy3" parent="." instance=ExtResource("4_huq5d")]
-position = Vector2(1210, 445)
+position = Vector2(912, 470)
+
+[node name="Enemy4" parent="." instance=ExtResource("4_huq5d")]
+position = Vector2(403, 481)
 
 [connection signal="timeout" from="SpawnEnemyTimer" to="." method="_on_spawn_enemy_timer_timeout"]

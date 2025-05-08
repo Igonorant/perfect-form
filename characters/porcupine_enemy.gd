@@ -12,7 +12,7 @@ extends CharacterBody2D
 
 @onready var _main_sprite: Sprite2D = %MainSprite2D
 @onready var _spikes_sprite: Sprite2D = %SpikesSprite2D
-@onready var _hurtbox_collision_shape: CollisionShape2D = $HurtBoxComponent/CollisionShape2D
+@onready var _hurtbox_collision_shape: CollisionShape2D = %CollisionShape2D
 
 var _main_sprite_original_position: Vector2
 var _spikes_sprite_original_position: Vector2

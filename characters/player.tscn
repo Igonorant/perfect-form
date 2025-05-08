@@ -26,7 +26,8 @@ shape = SubResource("CircleShape2D_hqtel")
 
 [node name="VelocityComponent" parent="." instance=ExtResource("3_i3pqv")]
 unique_name_in_owner = true
-acceleration_time = 0.2
+speed_limit = 225.0
+acceleration_time = 0.25
 deceleration_time = 0.4
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_x0jl3")]
