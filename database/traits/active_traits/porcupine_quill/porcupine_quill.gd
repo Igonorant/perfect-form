@@ -7,6 +7,8 @@ extends TraitInterface
 @onready var _life_timer: Timer = %LifeTimer
 @onready var _hurt_box_collision_shape: CollisionShape2D = %HurtBoxComponent/CollisionShape2D
 
+@onready var _attached_timer: Timer = %AttachedTimer
+
 var _direction: Vector2 = Vector2.ZERO
 var _is_attached: bool = false
 var _attached_body: Node2D = null
@@ -51,7 +53,10 @@ func _ready() -> void:
 
     _hurt_box.body_hurted.connect(_on_body_hurted)
 
-    _life_timer.timeout.connect(_on_life_timer_timeout)
+    _attached_timer.timeout.connect(_on_life_or_attached_timer_timeout)
+    _life_timer.timeout.connect(_on_life_or_attached_timer_timeout)
+    _life_timer.start()
+
 
 func _physics_process(delta: float) -> void:
     super (delta)
@@ -64,7 +69,7 @@ func _physics_process(delta: float) -> void:
     else:
         translate(_velocity.get_velocity() * delta)
 
-func _on_life_timer_timeout() -> void:
+func _on_life_or_attached_timer_timeout() -> void:
     queue_free()
 
 func _on_body_hurted(_hurter: Node2D, hurted: Node2D) -> void:
@@ -78,6 +83,8 @@ func _on_body_hurted(_hurter: Node2D, hurted: Node2D) -> void:
     # Calculate how to attach the quill to the body
     _attached_body = hurted
     _is_attached = true
+    _attached_timer.start()
+    _life_timer.stop()
     _calculate_attached_offset()
     # Add some variation to make multiple quills attached to the same body look different
     rotation = _attached_offset.angle() + randf_range(-_attached_rotation_variation, _attached_rotation_variation)

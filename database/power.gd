@@ -37,15 +37,15 @@ func spawn(spawn_info: SpawnInfo) -> void:
             trait_modifier.spawn_trait_inject_before_ready(instance)
 
         # This can be called when there is unsafe to add elements to the tree, calling deferred because of it
-        call_deferred("_finish_spawn", instance)
+        call_deferred("_finish_spawn", instance, spawn_info)
 
-func _finish_spawn(instance):
+func _finish_spawn(instance: TraitInterface, spawn_info: SpawnInfo):
     # Add to the tree to call _ready function
     add_child(instance)
 
     # Inject modification in each instance after ready
     for trait_modifier in trait_modifiers:
-        trait_modifier.spawn_trait_inject_after_ready(instance)
+        trait_modifier.spawn_trait_inject_after_ready(instance, spawn_info)
 
     # Add callback to _on_body_hurted
     instance.connect_on_body_hurted(_on_body_hurted)

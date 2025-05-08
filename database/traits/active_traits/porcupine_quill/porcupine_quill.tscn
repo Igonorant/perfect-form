@@ -39,4 +39,7 @@ speed_limit = 800.0
 [node name="LifeTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 wait_time = 5.0
-autostart = true
+
+[node name="AttachedTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.0

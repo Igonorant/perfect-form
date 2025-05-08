@@ -15,7 +15,7 @@ func spawn_trait_inject_before_ready(_trait_instance: TraitInterface) -> void:
     pass
 
 ## Injects its modifications in the trait instance, after calling _ready function, like more damage, increased effect ...
-func spawn_trait_inject_after_ready(_trait_instance: TraitInterface) -> void:
+func spawn_trait_inject_after_ready(_trait_instance: TraitInterface, _spawn_info: SpawnInfo) -> void:
     pass
 
 ## Injects its modifications in the physics process, like direction control of projectiles ...

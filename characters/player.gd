@@ -22,7 +22,8 @@ func _ready() -> void:
     # THIS IS TEMPORARY TEST CODE
     q_press_power = Power.new()
     q_press_power.trait_interface = load("uid://b80u6558u77jj")
-    q_press_power.trait_modifiers = [ForkshotRes.new(q_press_power), MultishotRes.new(), PierceshotRes.new(), ExplodeOnImpactRes.new(q_press_power)]
+    # q_press_power.trait_modifiers = [ForkshotRes.new(q_press_power), MultishotRes.new(), PierceshotRes.new(), ExplodeOnImpactRes.new(q_press_power)]
+    q_press_power.trait_modifiers = [ShotgunizerRes.new(), ForkshotRes.new(q_press_power)]
     q_press_power.friendly = true
     owner.call_deferred("add_child", q_press_power)
 

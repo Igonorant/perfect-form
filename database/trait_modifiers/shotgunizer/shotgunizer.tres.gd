@@ -1,11 +1,13 @@
-class_name MultishotRes
+class_name ShotgunizerRes
 extends TraitModifier
 
-var _total_number_of_projectiles: int = 3
+# TODO: consider unifying this class with multishot, since they are almost the same
+
+const _total_number_of_projectiles: int = 10
 func spawn_power_inject(power: Power, _spawn_info: SpawnInfo) -> void:
     power._trait_spawn_amount += _total_number_of_projectiles
 
-var _direction_rotation_limit: float = PI / 18
+const _direction_rotation_limit: float = PI / 9
 var _instances_counter: int = 0
 func spawn_trait_inject_before_ready(trait_instance: TraitInterface) -> void:
     # Prevents some interaction when a instance is forked, preventing it to fork into multiple new instances
@@ -18,3 +20,10 @@ func spawn_trait_inject_before_ready(trait_instance: TraitInterface) -> void:
     var new_direction = trait_instance.get_direction().rotated(
         randf_range(-_direction_rotation_limit, _direction_rotation_limit))
     trait_instance.set_direction(new_direction)
+
+const _life_timer_wait_time = 0.2 # Consider using trait speed to calculate this
+func spawn_trait_inject_after_ready(_trait_instance: TraitInterface, _spawn_info: SpawnInfo) -> void:
+    var life_timer: Timer = _trait_instance.find_child("LifeTimer")
+    if (life_timer):
+        life_timer.wait_time = _life_timer_wait_time
+        life_timer.start()
