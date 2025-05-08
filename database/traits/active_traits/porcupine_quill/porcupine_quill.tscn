@@ -15,8 +15,9 @@ height = 40.0
 script = ExtResource("1_sgbgv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, 1)
-rotation = 0.750492
+position = Vector2(9.53674e-07, 9.53674e-07)
+rotation = 1.44862
+scale = Vector2(0.143349, 1.16097)
 texture = ExtResource("2_x8wqh")
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("3_34v25")]
@@ -34,7 +35,7 @@ debug_color = Color(0.984314, 0, 0, 0.419608)
 
 [node name="VelocityComponent" parent="." instance=ExtResource("5_34v25")]
 unique_name_in_owner = true
-speed_limit = 1200.0
+speed_limit = 800.0
 
 [node name="LifeTimer" type="Timer" parent="."]
 unique_name_in_owner = true

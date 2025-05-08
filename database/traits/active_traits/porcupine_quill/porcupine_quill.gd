@@ -17,15 +17,13 @@ var _has_pierce_modifier: bool = false
 
 ##### BEGIN INTERFACE IMPLEMENTATION #####
 
-func set_spawn_info(spawn_info: SpawnInfo, _friendly: bool) -> void:
-    # TODO: update collision mask of hurt box based on friendly variable
+func set_spawn_info(spawn_info: SpawnInfo) -> void:
     global_position = spawn_info.spawn_position
     _direction = spawn_info.spawn_direction.normalized()
     _is_forked = spawn_info.is_forked
     _has_pierce_modifier = spawn_info.has_pierce_modifier
 
 func connect_on_body_hurted(callable: Callable) -> void:
-    print("About to connect on body hurted for porjectile: ", name)
     _hurt_box.body_hurted.connect(callable)
 
 func is_forked() -> bool:
@@ -46,7 +44,6 @@ func get_direction() -> Vector2:
 ##### END INTERFACE IMPLEMENTATION #####
 
 func _ready() -> void:
-    print("Calling ready function for projectile: ", name)
     assert(!_direction.is_zero_approx() and _direction.is_normalized())
     _velocity.set_acceleration_direction(_direction)
     rotation = _direction.angle()

@@ -30,7 +30,7 @@ func spawn(spawn_info: SpawnInfo) -> void:
     for idx in range(_trait_spawn_amount):
         # Create a new instance of the trait
         var instance: TraitInterface = trait_interface.instantiate()
-        instance.set_spawn_info(spawn_info, friendly)
+        instance.set_spawn_info(spawn_info)
 
         # Inject modification in each instance before ready
         for trait_modifier in trait_modifiers:
@@ -49,6 +49,9 @@ func _finish_spawn(instance):
 
     # Add callback to _on_body_hurted
     instance.connect_on_body_hurted(_on_body_hurted)
+
+    # Set the correct collision layer
+    instance.set_collision_layer_and_mask(friendly)
 
 func _physics_process(delta: float) -> void:
     for instance in get_children():
