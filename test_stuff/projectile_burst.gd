@@ -3,8 +3,8 @@ extends Projectile
 
 @export var max_variation: float
 
-enum State {STARTING, RUNNING, EXPLODING}
-var state: State = State.STARTING
+enum Behavior {STARTING, RUNNING, EXPLODING}
+var state: Behavior = Behavior.STARTING
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
@@ -15,15 +15,15 @@ func _ready():
 
 func _on_animation_finished():
     match state:
-        State.STARTING:
-            state = State.RUNNING
+        Behavior.STARTING:
+            state = Behavior.RUNNING
             sprite.play("going")
-        State.EXPLODING:
+        Behavior.EXPLODING:
             queue_free() # Or emit signal / pool it
 
 func explode():
-    if state != State.EXPLODING:
-        state = State.EXPLODING
+    if state != Behavior.EXPLODING:
+        state = Behavior.EXPLODING
         sprite.play("hit")
 
 func _on_hurt_box_component_hurt_body(body: Node2D, _damage: float) -> void:
