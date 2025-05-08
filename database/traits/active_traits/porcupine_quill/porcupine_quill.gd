@@ -83,9 +83,9 @@ func _on_body_hurted(_hurter: Node2D, hurted: Node2D) -> void:
     rotation = _attached_offset.angle() + randf_range(-_attached_rotation_variation, _attached_rotation_variation)
 
 func _calculate_attached_offset() -> void:
-    var collision_shape: CollisionShape2D = _attached_body.find_child("CollisionShape2D")
-    if collision_shape:
-        var body_shape_size := collision_shape.shape.get_rect().size
+    var hit_box: CollisionShape2D = _attached_body.find_child("HitBox")
+    if hit_box:
+        var body_shape_size := hit_box.shape.get_rect().size
         var hurt_box_shape_size := _hurt_box_collision_shape.shape.get_rect().size
         # Half of the body shape size and 0.35 of the quill size
         # (0.5 would make all the spike to be outside of the body, so 0.35 makes 15% of the quill to be inside the body)
