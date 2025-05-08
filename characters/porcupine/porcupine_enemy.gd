@@ -14,12 +14,17 @@ extends CharacterBody2D
 @onready var _spikes_sprite: Sprite2D = %SpikesSprite2D
 @onready var _hurtbox_collision_shape: CollisionShape2D = %CollisionShape2D
 
+
 var _main_sprite_original_position: Vector2
 var _spikes_sprite_original_position: Vector2
 var _hurtbox_collision_shape_original_position: Vector2
 
 var _target: Node2D
 var _invulnerable: bool = false
+
+var _power: Power
+enum ModifierOption {NONE, MULTISHOT}
+@onready var _trait_scene: PackedScene = preload("uid://b80u6558u77jj")
 
 enum Behavior {IDLE, MOVING, ATTACKING, TAKING_DAMAGE, DEAD}
 @onready var _fsm: StateMachine = StateMachine.new()
@@ -43,11 +48,22 @@ func _ready() -> void:
     _fsm.end_adding_states()
     _fsm.set_state(Behavior.IDLE)
 
+    _create_power()
+
     _invulnerable = true
+
+func _create_power() -> void:
+    _power = Power.new()
+    _power.set_unfriendly()
+    _power.set_trait(_trait_scene)
+    var trait_to_add: ModifierOption = ModifierOption.values().pick_random()
+    match trait_to_add:
+        ModifierOption.NONE: pass
+        ModifierOption.MULTISHOT: _power.add_trait_modifier(MultishotRes.new())
+    add_child(_power)
 
 func set_target(target: Node2D) -> void:
     _target = target
-
 
 func _physics_process(_delta: float) -> void:
     match _fsm.get_state():
@@ -83,6 +99,7 @@ func turn_right() -> void:
 
 
 ### IDLE STATE ###
+#region idle_state
 
 func _about_to_enter_idle() -> void:
     _animation.play("idle")
@@ -95,8 +112,10 @@ func _on_idle_timer_timeout() -> void:
     _invulnerable = false
     _fsm.set_state(Behavior.MOVING)
 
+#endregion
 
 ### MOVING STATE ###
+#region moving_state
 
 func _about_to_enter_moving() -> void:
     _animation.play("moving")
@@ -108,7 +127,10 @@ func _on_moving_timer_timeout() -> void:
 func _in_state_moving_physics_process() -> void:
     _velocity.set_acceleration_direction(_target.global_position - global_position)
 
+#endregion
+
 ### ATTACKING STATE ###
+#region attacking_state
 
 func _about_to_enter_attacking() -> void:
     _animation.play("attacking")
@@ -118,8 +140,10 @@ func _in_state_attacking() -> void:
     _attack()
 
 func _attack() -> void:
-    # TODO: add attacking logic here
-    pass
+    var spawn_info := SpawnInfo.new()
+    spawn_info.spawn_position = global_position
+    spawn_info.spawn_direction = (_target.global_position - global_position).normalized()
+    _power.spawn(spawn_info)
 
 func _on_animation_finished(anim_name: StringName) -> void:
     match anim_name:
@@ -128,8 +152,10 @@ func _on_animation_finished(anim_name: StringName) -> void:
         "taking_damage":
             _fsm.set_state(_fsm.get_previous_state())
 
+#endregion
 
 ### TAKING DAMAGE STATE ###
+#region taking_damage_state
 
 func _about_to_enter_taking_damage() -> void:
     _animation.play("taking_damage")
@@ -161,8 +187,10 @@ func take_damage(damages: Array[Damage]) -> void:
     if (took_damage):
         _fsm.set_state(Behavior.TAKING_DAMAGE)
 
+#endregion
 
 ### DEAD STATE ###
+#region dead_state
 
 func _on_dead_timer_timeout() -> void:
     queue_free()
@@ -180,3 +208,5 @@ func in_state_dead() -> void:
     _idle_timer.stop()
     _moving_timer.stop()
     _dead_timer.start()
+
+#endregion

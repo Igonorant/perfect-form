@@ -25,6 +25,7 @@ func set_spawn_info(spawn_info: SpawnInfo, _friendly: bool) -> void:
     _has_pierce_modifier = spawn_info.has_pierce_modifier
 
 func connect_on_body_hurted(callable: Callable) -> void:
+    print("About to connect on body hurted for porjectile: ", name)
     _hurt_box.body_hurted.connect(callable)
 
 func is_forked() -> bool:
@@ -45,6 +46,7 @@ func get_direction() -> Vector2:
 ##### END INTERFACE IMPLEMENTATION #####
 
 func _ready() -> void:
+    print("Calling ready function for projectile: ", name)
     assert(!_direction.is_zero_approx() and _direction.is_normalized())
     _velocity.set_acceleration_direction(_direction)
     rotation = _direction.angle()

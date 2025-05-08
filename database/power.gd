@@ -7,6 +7,15 @@ extends Node
 
 var _trait_spawn_amount: int
 
+func set_trait(trait_scene: PackedScene) -> void:
+    trait_interface = trait_scene
+
+func add_trait_modifier(trait_modifier: TraitModifier) -> void:
+    trait_modifiers.append(trait_modifier)
+
+func set_unfriendly() -> void:
+    friendly = false
+
 func _reset() -> void:
     _trait_spawn_amount = 1
 
@@ -27,12 +36,13 @@ func spawn(spawn_info: SpawnInfo) -> void:
         for trait_modifier in trait_modifiers:
             trait_modifier.spawn_trait_inject_before_ready(instance)
 
-        call_deferred("add_child", instance)
-        # _finish_spawn should be called after add child to ensure _ready function has already happened
+        # This can be called when there is unsafe to add elements to the tree, calling deferred because of it
         call_deferred("_finish_spawn", instance)
 
-# This should be called after add child to ensure _ready function already have happened
 func _finish_spawn(instance):
+    # Add to the tree to call _ready function
+    add_child(instance)
+
     # Inject modification in each instance after ready
     for trait_modifier in trait_modifiers:
         trait_modifier.spawn_trait_inject_after_ready(instance)
