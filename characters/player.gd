@@ -5,6 +5,10 @@ extends CharacterBody2D
 @onready var _health: HealthComponent = %HealthComponent
 @onready var _invulnerability: InvulnerabilityComponent = %InvulnerabilityComponent
 @onready var _sprite: Sprite2D = $Sprite2D
+@onready var _animation: AnimationPlayer = %AnimationPlayer
+@onready var _power_spawn_location: Marker2D = %PowerSpawnLocation
+
+var _power_spawn_location_original_x: float = 0.0
 
 var q_press_power: Power = null
 var w_press_power: Power = null
@@ -19,6 +23,8 @@ func _ready() -> void:
     _player_input_direction = Vector2.ZERO
     _player_last_input_direction = Vector2.ZERO
 
+    _power_spawn_location_original_x = _power_spawn_location.position.x
+
     # THIS IS TEMPORARY TEST CODE
     q_press_power = Power.new()
     q_press_power.trait_interface = load("uid://b80u6558u77jj")
@@ -30,10 +36,11 @@ func _ready() -> void:
 func _connect_to_hud(update_health_bar: Callable) -> void:
     _health.health_changed.connect(update_health_bar)
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
     _calculate_direction()
-    _handle_inputs()
+    _handle_inputs(delta)
     _move()
+    _update_animation()
     _update_sprite_direction()
 
 func _calculate_direction() -> void:
@@ -43,17 +50,17 @@ func _calculate_direction() -> void:
     if (!_player_input_direction.is_zero_approx()):
         _player_last_input_direction = _player_input_direction
 
-func _handle_inputs() -> void:
+func _handle_inputs(delta: float) -> void:
     if Input.is_action_just_pressed("atk_q") and q_press_power != null:
-        _spawn_power(q_press_power)
+        _spawn_power(q_press_power, delta)
     if Input.is_action_just_pressed("atk_w") and w_press_power != null:
-        _spawn_power(w_press_power)
+        _spawn_power(w_press_power, delta)
     if Input.is_action_just_pressed("atk_e") and e_press_power != null:
-        _spawn_power(e_press_power)
+        _spawn_power(e_press_power, delta)
 
-func _spawn_power(power: Power) -> void:
+func _spawn_power(power: Power, delta: float) -> void:
     var spawn_info: SpawnInfo = SpawnInfo.new()
-    spawn_info.spawn_position = global_position
+    spawn_info.spawn_position = _power_spawn_location.global_position + velocity * delta
     spawn_info.spawn_direction = _player_last_input_direction if _player_input_direction.is_zero_approx() else _player_input_direction
     power.spawn(spawn_info)
 
@@ -63,13 +70,21 @@ func _move() -> void:
     velocity = _velocity.get_velocity()
     move_and_slide()
 
+func _update_animation() -> void:
+    if (velocity.length_squared() > 100):
+        _animation.play("walking")
+    else:
+        _animation.play("idle")
+
 func _update_sprite_direction() -> void:
     # This needs to be a little bit complex to avoid flipping the sprite when input direction is 0.
     if (_sprite.flip_h):
         if (_player_input_direction.x < 0.0):
             _sprite.flip_h = false
+            _power_spawn_location.position.x = _power_spawn_location_original_x
     elif (_player_input_direction.x > 0.0):
         _sprite.flip_h = true
+        _power_spawn_location.position.x = - _power_spawn_location_original_x
 
 func take_damage(damages: Array[Damage]) -> void:
     if (_invulnerability.is_active()):

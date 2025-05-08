@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_otnt2")
-name = ""
-description = ""
+name = "Shotgunizer"
+description = "Make trait shoots a lot of projectiles, but they now have a shorter range"
 metadata/_custom_type_script = "uid://j3mu0p5h5vgg"

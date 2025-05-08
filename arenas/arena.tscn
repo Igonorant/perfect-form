@@ -29,10 +29,9 @@ color = Color(0.127749, 0.00382229, 0.0748794, 1)
 
 [node name="ArenaColor" type="ColorRect" parent="."]
 z_index = -10
-offset_top = 1.0
-offset_right = 1279.0
+offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.242073, 0.0122584, 0.156128, 1)
+color = Color(0.657903, 0.745418, 1, 1)
 
 [node name="CollisionBorder" type="StaticBody2D" parent="."]
 collision_mask = 7
