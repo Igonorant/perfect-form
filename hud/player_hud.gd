@@ -16,3 +16,7 @@ func connect_to_player() -> void:
 
 func _update_health_bar(health_percentage: float) -> void:
     health_bar.value = health_percentage * 100.0
+
+func _process(_delta: float) -> void:
+    var parent: Camera2D = get_parent()
+    global_position = parent.get_screen_center_position() + Vector2(-320, -180)
