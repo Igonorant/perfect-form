@@ -18,7 +18,7 @@ metadata/_custom_type_script = "uid://dphfi78fp4a5p"
 [sub_resource type="CircleShape2D" id="CircleShape2D_toq4n"]
 radius = 13.1529
 
-[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+[node name="StaticEnemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_451i7")
@@ -34,6 +34,8 @@ shape = SubResource("CircleShape2D_nhupr")
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_y8dgj")]
 unique_name_in_owner = true
+position = Vector2(0, -19)
+scale = Vector2(0.6, 1)
 max_health = 1000.0
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("5_fbtf1")]

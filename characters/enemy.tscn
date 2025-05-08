@@ -41,6 +41,8 @@ deceleration_time = 3.0
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_toq4n")]
 unique_name_in_owner = true
+position = Vector2(0, -19)
+scale = Vector2(0.6, 1)
 
 [node name="HurtBoxComponent" parent="." instance=ExtResource("4_ggbst")]
 visible = false

@@ -32,6 +32,7 @@ deceleration_time = 0.4
 
 [node name="HealthComponent" parent="." instance=ExtResource("4_x0jl3")]
 unique_name_in_owner = true
+position = Vector2(0, -26)
 add_health_bar = false
 
 [node name="InvulnerabilityComponent" parent="." node_paths=PackedStringArray("item") instance=ExtResource("5_evndh")]

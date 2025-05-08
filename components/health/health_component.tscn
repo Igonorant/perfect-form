@@ -17,13 +17,22 @@ expand_margin_bottom = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_02umq"]
 bg_color = Color(1, 0, 0, 1)
 
-[node name="HealthComponent" type="Node"]
+[node name="HealthComponent" type="Node2D"]
 script = ExtResource("1_t2tvt")
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
-offset_right = 48.0
-offset_bottom = 2.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -1.0
+offset_right = 24.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_npdka")
 theme_override_styles/fill = SubResource("StyleBoxFlat_02umq")
 show_percentage = false
