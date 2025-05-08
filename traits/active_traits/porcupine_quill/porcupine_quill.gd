@@ -55,6 +55,8 @@ func _ready() -> void:
     _life_timer.timeout.connect(_on_life_timer_timeout)
 
 func _physics_process(delta: float) -> void:
+    super (delta)
+
     if _is_attached:
         if _attached_body == null:
             queue_free()

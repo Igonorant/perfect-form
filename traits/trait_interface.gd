@@ -2,6 +2,16 @@
 class_name TraitInterface
 extends Node2D
 
+@onready var _out_of_game_bounds = get_viewport_rect().grow(360.0)
+
+func _free_if_out_of_game_bounds() -> void:
+    if (!_out_of_game_bounds.has_point(global_position)):
+        print("Freeing node: ", name)
+        queue_free()
+
+func _physics_process(_delta: float) -> void:
+    _free_if_out_of_game_bounds()
+
 func set_spawn_info(_spawn_info: SpawnInfo, _friendly: bool) -> void:
     pass
 
