@@ -1,3 +1,4 @@
+@icon("uid://dpc6ftmmk58xb")
 class_name TraitModifier
 extends Resource
 

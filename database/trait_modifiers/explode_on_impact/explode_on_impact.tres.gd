@@ -2,8 +2,8 @@ class_name ExplodeOnImpactRes
 extends TraitModifier
 
 var _power: Power
-var scene: PackedScene = preload("res://database/trait_modifiers/explode_on_impact.tscn")
-var damage: Damage = preload("res://database/trait_modifiers/explode_on_impact.damage.tres")
+var scene: PackedScene = preload("uid://branx6be27l02")
+var damage: Damage = preload("uid://drvd3053kdbkx")
 
 # TODO: maybe replace by a set_power function with overwritting init with parameter becomes a problem
 func _init(power: Power) -> void:

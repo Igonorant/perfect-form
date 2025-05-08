@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://dhxvvnesywyfb" path="res://assets/explosion.png" id="1_ywlq0"]
 [ext_resource type="Script" uid="uid://bfxi8jj5hq1l8" path="res://components/hurt_box/hurt_box_component.gd" id="2_7qxqe"]
-[ext_resource type="Script" uid="uid://c60iiqhfsjfm" path="res://database/trait_modifiers/explode_on_impact.gd" id="2_ojw1h"]
+[ext_resource type="Script" uid="uid://c60iiqhfsjfm" path="res://database/trait_modifiers/explode_on_impact/explode_on_impact.gd" id="2_ojw1h"]
 [ext_resource type="Script" uid="uid://dphfi78fp4a5p" path="res://database/damage.gd" id="3_ojw1h"]
-[ext_resource type="Resource" uid="uid://drvd3053kdbkx" path="res://database/trait_modifiers/explode_on_impact.damage.tres" id="4_mpoi0"]
+[ext_resource type="Resource" uid="uid://drvd3053kdbkx" path="res://database/trait_modifiers/explode_on_impact/explode_on_impact.damage.tres" id="4_mpoi0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r0gu6"]
 atlas = ExtResource("1_ywlq0")

@@ -7,7 +7,6 @@ extends Node2D
 
 @onready var _current_health: float = max_health
 @onready var _health_bar: ProgressBar = %HealthBar
-@onready var _parent: Node = get_parent()
 
 signal health_depleted
 signal health_changed(health_percentage: float)

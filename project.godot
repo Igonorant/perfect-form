@@ -49,7 +49,8 @@ folder_colors={
 "res://characters/": "red",
 "res://components/": "purple",
 "res://database/": "orange",
-"res://traits/": "teal"
+"res://database/trait_modifiers/": "pink",
+"res://database/traits/": "teal"
 }
 
 [global_group]

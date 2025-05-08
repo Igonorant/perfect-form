@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="PierceshotRes" load_steps=2 format=3 uid="uid://dy1fbupaantbv"]
+
+[ext_resource type="Script" uid="uid://b48snd7enooat" path="res://database/trait_modifiers/pierceshot/pierceshot.tres.gd" id="1_wiv7l"]
+
+[resource]
+script = ExtResource("1_wiv7l")
+name = "Pierceshot"
+description = "Make trait pierce anything it hits"
+metadata/_custom_type_script = "uid://b48snd7enooat"

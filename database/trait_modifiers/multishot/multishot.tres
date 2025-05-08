@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MultishotRes" load_steps=2 format=3 uid="uid://bode6xdsvtguh"]
+
+[ext_resource type="Script" uid="uid://ulv5n0qaob81" path="res://database/trait_modifiers/multishot/multishot.tres.gd" id="1_th2gk"]
+
+[resource]
+script = ExtResource("1_th2gk")
+name = "Multishot"
+description = "Make trait be activate tree times with some small variation in the direction"
+metadata/_custom_type_script = "uid://ulv5n0qaob81"

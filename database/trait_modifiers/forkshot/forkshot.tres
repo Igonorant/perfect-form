@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ForkshotRes" load_steps=2 format=3 uid="uid://kccnxyr72e78"]
+
+[ext_resource type="Script" uid="uid://d2p2b6xo1m77c" path="res://database/trait_modifiers/forkshot/forkshot.tres.gd" id="1_242c0"]
+
+[resource]
+script = ExtResource("1_242c0")
+name = "Forkshot"
+description = "Make trait forks into two new traits when hitting something"
+metadata/_custom_type_script = "uid://d2p2b6xo1m77c"
