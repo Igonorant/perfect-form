@@ -35,7 +35,7 @@ func _ready() -> void:
 
     e_press_power = Power.new()
     e_press_power.trait_interface = load("uid://b80u6558u77jj")
-    e_press_power.trait_modifiers = []
+    e_press_power.trait_modifiers = [RingshotRes.new(), ForkshotRes.new(q_press_power), PierceshotRes.new()]
     e_press_power.friendly = true
     owner.call_deferred("add_child", e_press_power)
 

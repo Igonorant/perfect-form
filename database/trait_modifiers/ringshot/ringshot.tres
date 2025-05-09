@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="RingshotRes" load_steps=2 format=3 uid="uid://df80nw251fd0u"]
+
+[ext_resource type="Script" uid="uid://bppxmhsh0w67v" path="res://database/trait_modifiers/ringshot/ringshot.tres.gd" id="1_tdi47"]
+
+[resource]
+script = ExtResource("1_tdi47")
+name = "Ringshot"
+description = "Make trait spawn in a circular pattern around the player"
+metadata/_custom_type_script = "uid://bppxmhsh0w67v"

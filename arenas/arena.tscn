@@ -67,6 +67,8 @@ position_smoothing_speed = 4.0
 editor_draw_limits = true
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
 
 [node name="Enemy" parent="." instance=ExtResource("4_huq5d")]
 position = Vector2(894, 221)
