@@ -5,14 +5,13 @@ extends TraitInterface
 @onready var _velocity: VelocityComponent = %VelocityComponent
 @onready var _hurt_box: HurtBoxComponent = %HurtBoxComponent
 @onready var _life_timer: Timer = %LifeTimer
-@onready var _hurt_box_collision_shape: CollisionShape2D = %HurtBoxComponent/CollisionShape2D
 
 @onready var _attached_timer: Timer = %AttachedTimer
 
 var _direction: Vector2 = Vector2.ZERO
 var _is_attached: bool = false
 var _attached_body: Node2D = null
-var _attached_rotation_variation: float = PI / 12
+var _attached_rotation_variation: float = PI / 18
 var _attached_offset: Vector2 = Vector2.ZERO
 var _is_forked: bool = false
 var _has_pierce_modifier: bool = false
@@ -48,6 +47,8 @@ func get_direction() -> Vector2:
 func _ready() -> void:
     super ()
     assert(!_direction.is_zero_approx() and _direction.is_normalized())
+    z_index = -1
+
     _velocity.set_acceleration_direction(_direction)
     rotation = _direction.angle()
 
@@ -72,7 +73,7 @@ func _physics_process(delta: float) -> void:
 func _on_life_or_attached_timer_timeout() -> void:
     queue_free()
 
-func _on_body_hurted(_hurter: Node2D, hurted: Node2D) -> void:
+func _on_body_hurted(hurter: Node2D, hurted: Node2D) -> void:
     if (_has_pierce_modifier):
         return
 
@@ -85,15 +86,13 @@ func _on_body_hurted(_hurter: Node2D, hurted: Node2D) -> void:
     _is_attached = true
     _attached_timer.start()
     _life_timer.stop()
-    _calculate_attached_offset()
-    # Add some variation to make multiple quills attached to the same body look different
-    rotation = _attached_offset.angle() + randf_range(-_attached_rotation_variation, _attached_rotation_variation)
+    _calculate_attached_offset(hurter, hurted)
+    _calculate_rotation(hurter, hurted)
 
-func _calculate_attached_offset() -> void:
-    var hit_box: CollisionShape2D = _attached_body.find_child("HitBox")
-    if hit_box:
-        var body_shape_size := hit_box.shape.get_rect().size
-        var hurt_box_shape_size := _hurt_box_collision_shape.shape.get_rect().size
-        # Half of the body shape size and 0.35 of the quill size
-        # (0.5 would make all the spike to be outside of the body, so 0.35 makes 15% of the quill to be inside the body)
-        _attached_offset = - _direction * body_shape_size * 0.5 - _direction * hurt_box_shape_size.y * 0.35
+func _calculate_attached_offset(hurter: Node2D, hurted: Node2D) -> void:
+    _attached_offset = hurter.global_position - hurted.global_position
+
+func _calculate_rotation(hurter: Node2D, hurted: Node2D) -> void:
+    # Add some variation to make multiple quills attached to the same position to look different
+    rotation = (hurted.global_position - hurter.global_position).angle() \
+             + randf_range(-_attached_rotation_variation, _attached_rotation_variation)
