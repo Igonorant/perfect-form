@@ -4,7 +4,6 @@ extends CharacterBody2D
 @onready var _velocity: VelocityComponent = %VelocityComponent
 @onready var _health: HealthComponent = %HealthComponent
 @onready var _invulnerability: InvulnerabilityComponent = %InvulnerabilityComponent
-@onready var _sprite: Sprite2D = $Sprite2D
 @onready var _animation: AnimationPlayer = %AnimationPlayer
 @onready var _power_spawn_location: Marker2D = %PowerSpawnLocation
 
@@ -48,7 +47,7 @@ func _physics_process(delta: float) -> void:
     _handle_inputs(delta)
     _move()
     _update_animation()
-    _update_sprite_direction()
+    # _update_sprite_direction()
 
 func _calculate_direction() -> void:
     _player_input_direction = Vector2.ZERO
@@ -71,25 +70,10 @@ func _spawn_power(power: Power, delta: float) -> void:
     spawn_info.spawn_direction = _player_last_input_direction if _player_input_direction.is_zero_approx() else _player_input_direction
     power.spawn(spawn_info)
 
-
 func _move() -> void:
     _velocity.set_acceleration_direction(_player_input_direction)
     velocity = _velocity.get_velocity()
     move_and_slide()
-
-func _update_animation() -> void:
-    if (velocity.length_squared() > 100):
-        _animation.play("walking")
-    else:
-        _animation.play("idle")
-
-func _update_sprite_direction() -> void:
-    # This needs to be a little bit complex to avoid flipping the sprite when input direction is 0.
-    if (_sprite.flip_h):
-        if (_player_input_direction.x < 0.0):
-            _sprite.flip_h = false
-    elif (_player_input_direction.x > 0.0):
-        _sprite.flip_h = true
 
 func take_damage(damages: Array[Damage]) -> void:
     if (_invulnerability.is_active()):
@@ -97,3 +81,17 @@ func take_damage(damages: Array[Damage]) -> void:
     for damage in damages:
         _health.deal_damage(damage.amount)
     _invulnerability.activate()
+
+var _facing_right: bool = false
+func _update_animation() -> void:
+    # This needs to be a little bit complex to avoid flipping the sprite when input direction is 0.
+    if (_facing_right):
+        if (_player_input_direction.x < 0.0):
+            _facing_right = false
+    elif (_player_input_direction.x > 0.0):
+        _facing_right = true
+
+    if (velocity.length_squared() > 100):
+        _animation.play("walking_right" if _facing_right else "walking_left")
+    else:
+        _animation.play("idle_right" if _facing_right else "idle_left")
