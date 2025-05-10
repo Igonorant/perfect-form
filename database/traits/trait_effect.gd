@@ -1,5 +1,5 @@
 @icon("res://assets/icons/damage.png")
-class_name TraitInfo
+class_name TraitEffect
 extends Resource
 
 enum EffectType {

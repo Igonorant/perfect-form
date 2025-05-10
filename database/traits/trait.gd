@@ -6,4 +6,4 @@ extends Resource
 @export var name: String
 @export var description: String
 
-@export var damages: Array[TraitInfo]
+@export var damages: Array[TraitEffect]

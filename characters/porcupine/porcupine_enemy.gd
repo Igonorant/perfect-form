@@ -177,7 +177,7 @@ func _about_to_exit_taking_damage() -> void:
     _idle_timer.paused = false
     _moving_timer.paused = false
 
-func take_damage(damages: Array[TraitInfo]) -> void:
+func take_damage(damages: Array[TraitEffect]) -> void:
     if (_invulnerable):
         return
 

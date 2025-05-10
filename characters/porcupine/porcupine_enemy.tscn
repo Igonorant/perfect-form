@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dahnogck2kxfx" path="res://components/velocity/velocity_component.tscn" id="3_omlyv"]
 [ext_resource type="PackedScene" uid="uid://b6o5k202plrx7" path="res://components/health/health_component.tscn" id="4_8xshg"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="5_oedjk"]
-[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/traits/trait_info.gd" id="6_1ahej"]
-[ext_resource type="Resource" uid="uid://d1qbax0abol07" path="res://characters/porcupine/porcupine_enemy_back_quill_trait_info.tres" id="7_6lty3"]
+[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/traits/trait_effect.gd" id="6_1ahej"]
+[ext_resource type="Resource" uid="uid://d1qbax0abol07" path="res://characters/porcupine/porcupine_enemy_back_quill_trait_effect.tres" id="7_6lty3"]
 
 [sub_resource type="Animation" id="Animation_omlyv"]
 length = 0.001

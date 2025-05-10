@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="Trait" load_steps=5 format=3 uid="uid://dqe40msolkixa"]
 
 [ext_resource type="Texture2D" uid="uid://c1piwcakl31c5" path="res://assets/traits/porcupine_quill.png" id="1_jfhsc"]
-[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/traits/trait_info.gd" id="1_mha52"]
-[ext_resource type="Resource" uid="uid://djrvv6wnpeooc" path="res://database/traits/active_traits/porcupine_quill/porcupine_quill_trait_info.tres" id="2_e8c8v"]
+[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/traits/trait_effect.gd" id="1_mha52"]
+[ext_resource type="Resource" uid="uid://djrvv6wnpeooc" path="res://database/traits/active_traits/porcupine_quill/porcupine_quill_trait_effect.tres" id="2_e8c8v"]
 [ext_resource type="Script" uid="uid://dm8iddbh4ff83" path="res://database/traits/trait.gd" id="2_ydstu"]
 
 [resource]

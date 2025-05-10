@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://uqasx5ljsdsr" path="res://characters/static_enemy.gd" id="1_451i7"]
 [ext_resource type="Texture2D" uid="uid://ta6vh22jk3wy" path="res://assets/placeholder_enemy.png" id="2_tkt2y"]
 [ext_resource type="PackedScene" uid="uid://b6o5k202plrx7" path="res://components/health/health_component.tscn" id="4_y8dgj"]
-[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/traits/trait_info.gd" id="5_6an6s"]
+[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/traits/trait_effect.gd" id="5_6an6s"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="5_fbtf1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhupr"]

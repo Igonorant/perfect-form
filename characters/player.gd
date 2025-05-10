@@ -75,7 +75,7 @@ func _move() -> void:
     velocity = _velocity.get_velocity()
     move_and_slide()
 
-func take_damage(damages: Array[TraitInfo]) -> void:
+func take_damage(damages: Array[TraitEffect]) -> void:
     if (_invulnerability.is_active()):
         return
     for damage in damages:

@@ -63,5 +63,5 @@ func set_direction(_direction: Vector2) -> void:
 func get_direction() -> Vector2:
     return Vector2.ZERO
 
-func add_damages(damages_to_add: Array[TraitInfo]) -> void:
+func add_damages(damages_to_add: Array[TraitEffect]) -> void:
     get_hurtbox().add_damages(damages_to_add)
