@@ -145,7 +145,7 @@ func _about_to_enter_attacking() -> void:
 
 func _in_state_attacking() -> void:
     _velocity.set_acceleration_direction(Vector2.ZERO)
-    _attack()
+    # _attack() -> is called by the animation player in the right frame
 
 func _attack() -> void:
     var spawn_info := SpawnInfo.new()
