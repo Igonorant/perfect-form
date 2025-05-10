@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TraitInfo" load_steps=2 format=3 uid="uid://d1qbax0abol07"]
+
+[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/trait_info.gd" id="1_8wo7k"]
+
+[resource]
+script = ExtResource("1_8wo7k")
+effect_amount = 5.0
+effect_type = 1
+status_build_up = 0.15
+status_type = 1
+metadata/_custom_type_script = "uid://bbyk7f3vhtjvv"

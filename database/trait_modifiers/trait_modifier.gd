@@ -2,9 +2,9 @@
 class_name TraitModifier
 extends Resource
 
+@export var icon: Texture2D
 @export var name: String
 @export var description: String
-@export var icon: Texture2D
 
 ## Injects its modifications in the power, like amount of traits to spawn, changes in trait spawn position ...
 func spawn_power_inject(_power: Power, _spawn_info: SpawnInfo) -> void:

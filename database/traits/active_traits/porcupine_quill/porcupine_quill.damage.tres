@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="Damage" load_steps=2 format=3 uid="uid://dsgobm2hqi6ti"]
-
-[ext_resource type="Script" uid="uid://dphfi78fp4a5p" path="res://database/damage.gd" id="1_hsghv"]
-
-[resource]
-script = ExtResource("1_hsghv")
-amount = 20.0
-type = 1
-metadata/_custom_type_script = "uid://dphfi78fp4a5p"

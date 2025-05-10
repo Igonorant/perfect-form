@@ -177,14 +177,14 @@ func _about_to_exit_taking_damage() -> void:
     _idle_timer.paused = false
     _moving_timer.paused = false
 
-func take_damage(damages: Array[Damage]) -> void:
+func take_damage(damages: Array[TraitInfo]) -> void:
     if (_invulnerable):
         return
 
     var took_damage: bool = false
     for damage in damages:
         if (!_health.is_depleted()):
-            _health.deal_damage(damage.amount)
+            _health.deal_damage(damage.effect_amount)
             took_damage = true
 
     if (_health.is_depleted()):

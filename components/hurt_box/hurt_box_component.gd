@@ -1,7 +1,7 @@
 class_name HurtBoxComponent
 extends Area2D
 
-@export var damages: Array[Damage] = []
+@export var damages: Array[TraitInfo] = []
 
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
@@ -15,5 +15,5 @@ func _on_body_entered(body: Node2D) -> void:
 func get_shape_rect() -> Rect2:
     return collision_shape.shape.get_rect()
 
-func add_damages(damages_to_add: Array[Damage]) -> void:
+func add_damages(damages_to_add: Array[TraitInfo]) -> void:
     damages.append_array(damages_to_add)

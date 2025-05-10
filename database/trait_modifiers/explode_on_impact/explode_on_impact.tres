@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="ExplodeOnImpactRes" load_steps=2 format=3 uid="uid://cc2stxuwm20i1"]
-
-[ext_resource type="Script" uid="uid://6mol71bw5bk2" path="res://database/trait_modifiers/explode_on_impact/explode_on_impact.tres.gd" id="1_41rkk"]
-
-[resource]
-script = ExtResource("1_41rkk")
-name = "Explode on Impact"
-description = "Make trait trigger a small explosion on impact"
-metadata/_custom_type_script = "uid://6mol71bw5bk2"

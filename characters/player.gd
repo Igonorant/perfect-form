@@ -29,7 +29,7 @@ func _ready() -> void:
 
     w_press_power = Power.new()
     w_press_power.trait_interface = load("uid://b80u6558u77jj")
-    w_press_power.trait_modifiers = [ForkshotRes.new(q_press_power), MultishotRes.new(), PierceshotRes.new(), ExplodeOnImpactRes.new(q_press_power)]
+    w_press_power.trait_modifiers = [ForkshotRes.new(q_press_power), MultishotRes.new(), PierceshotRes.new()]
     w_press_power.friendly = true
     owner.call_deferred("add_child", w_press_power)
 
@@ -75,11 +75,11 @@ func _move() -> void:
     velocity = _velocity.get_velocity()
     move_and_slide()
 
-func take_damage(damages: Array[Damage]) -> void:
+func take_damage(damages: Array[TraitInfo]) -> void:
     if (_invulnerability.is_active()):
         return
     for damage in damages:
-        _health.deal_damage(damage.amount)
+        _health.deal_damage(damage.effect_amount)
     _invulnerability.activate()
 
 var _facing_right: bool = false

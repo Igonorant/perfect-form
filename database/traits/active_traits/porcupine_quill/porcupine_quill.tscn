@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b80u6558u77jj"]
+[gd_scene load_steps=7 format=3 uid="uid://b80u6558u77jj"]
 
 [ext_resource type="Script" uid="uid://w3o8i3l0re7x" path="res://database/traits/active_traits/porcupine_quill/porcupine_quill.gd" id="1_sgbgv"]
-[ext_resource type="Resource" uid="uid://dsgobm2hqi6ti" path="res://database/traits/active_traits/porcupine_quill/porcupine_quill.damage.tres" id="2_plylm"]
+[ext_resource type="Resource" uid="uid://dqe40msolkixa" path="res://database/traits/active_traits/porcupine_quill/porcupine_quill.tres" id="2_wswbl"]
 [ext_resource type="Texture2D" uid="uid://c1piwcakl31c5" path="res://assets/traits/porcupine_quill.png" id="2_x8wqh"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="3_34v25"]
-[ext_resource type="Script" uid="uid://dphfi78fp4a5p" path="res://database/damage.gd" id="4_u8t6d"]
 [ext_resource type="PackedScene" uid="uid://dahnogck2kxfx" path="res://components/velocity/velocity_component.tscn" id="5_34v25"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_plylm"]
@@ -14,6 +13,7 @@ height = 40.0
 [node name="PorcupineQuill" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_sgbgv")
+_trait = ExtResource("2_wswbl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(13, 0)
@@ -26,7 +26,6 @@ unique_name_in_owner = true
 position = Vector2(13, 0)
 collision_layer = 8
 collision_mask = 5
-damages = Array[ExtResource("4_u8t6d")]([ExtResource("2_plylm")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 unique_name_in_owner = true

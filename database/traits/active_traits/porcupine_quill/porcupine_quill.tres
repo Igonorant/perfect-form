@@ -1,13 +1,14 @@
-[gd_resource type="Resource" script_class="Trait" load_steps=4 format=3 uid="uid://b1m6phq37s7be"]
+[gd_resource type="Resource" script_class="Trait" load_steps=5 format=3 uid="uid://dqe40msolkixa"]
 
 [ext_resource type="Texture2D" uid="uid://c1piwcakl31c5" path="res://assets/traits/porcupine_quill.png" id="1_jfhsc"]
-[ext_resource type="PackedScene" uid="uid://b80u6558u77jj" path="res://database/traits/active_traits/porcupine_quill/porcupine_quill.tscn" id="2_rbuq8"]
+[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/trait_info.gd" id="1_mha52"]
+[ext_resource type="Resource" uid="uid://djrvv6wnpeooc" path="res://database/traits/active_traits/porcupine_quill/porcupine_quill_trait_info.tres" id="2_e8c8v"]
 [ext_resource type="Script" uid="uid://dm8iddbh4ff83" path="res://database/trait.gd" id="2_ydstu"]
 
 [resource]
 script = ExtResource("2_ydstu")
+icon = ExtResource("1_jfhsc")
 name = "Porcupine Quill"
 description = "Fires a porcupine quill projectile"
-icon = ExtResource("1_jfhsc")
-scene = ExtResource("2_rbuq8")
+damages = Array[ExtResource("1_mha52")]([ExtResource("2_e8c8v")])
 metadata/_custom_type_script = "uid://dm8iddbh4ff83"

@@ -2,8 +2,8 @@
 class_name Trait
 extends Resource
 
+@export var icon: Texture2D
 @export var name: String
 @export var description: String
-@export var icon: Texture2D
 
-@export var scene: PackedScene
+@export var damages: Array[TraitInfo]

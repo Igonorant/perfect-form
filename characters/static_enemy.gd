@@ -14,8 +14,8 @@ func _physics_process(_delta: float) -> void:
 func set_target(target: Node2D) -> void:
     _target = target
 
-func take_damage(damages: Array[Damage]) -> void:
+func take_damage(damages: Array[TraitInfo]) -> void:
     for damage in damages:
-        _health.deal_damage(damage.amount)
+        _health.deal_damage(damage.effect_amount)
         if (_health.is_depleted()):
             queue_free()

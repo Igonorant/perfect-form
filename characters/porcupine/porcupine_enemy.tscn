@@ -5,7 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://dahnogck2kxfx" path="res://components/velocity/velocity_component.tscn" id="3_omlyv"]
 [ext_resource type="PackedScene" uid="uid://b6o5k202plrx7" path="res://components/health/health_component.tscn" id="4_8xshg"]
 [ext_resource type="PackedScene" uid="uid://c2xqegxfit86j" path="res://components/hurt_box/hurt_box_component.tscn" id="5_oedjk"]
-[ext_resource type="Script" uid="uid://dphfi78fp4a5p" path="res://database/damage.gd" id="6_ykos8"]
+[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/trait_info.gd" id="6_1ahej"]
+[ext_resource type="Resource" uid="uid://d1qbax0abol07" path="res://characters/porcupine/porcupine_enemy_back_quill_trait_info.tres" id="7_6lty3"]
 
 [sub_resource type="Animation" id="Animation_omlyv"]
 length = 0.001
@@ -159,12 +160,6 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_nhupr"]
 radius = 8.06226
 
-[sub_resource type="Resource" id="Resource_f76jb"]
-script = ExtResource("6_ykos8")
-amount = 10.0
-type = 1
-metadata/_custom_type_script = "uid://dphfi78fp4a5p"
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_toq4n"]
 radius = 8.06226
 
@@ -216,7 +211,7 @@ scale = Vector2(0.5, 1)
 [node name="HurtBoxComponent" parent="." instance=ExtResource("5_oedjk")]
 collision_layer = 16
 collision_mask = 6
-damages = Array[ExtResource("6_ykos8")]([SubResource("Resource_f76jb")])
+damages = Array[ExtResource("6_1ahej")]([ExtResource("7_6lty3")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
 unique_name_in_owner = true

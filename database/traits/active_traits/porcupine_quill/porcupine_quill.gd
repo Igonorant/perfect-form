@@ -2,6 +2,8 @@
 class_name PorcupineQuill
 extends TraitInterface
 
+@export var _trait: Trait
+
 @onready var _velocity: VelocityComponent = %VelocityComponent
 @onready var _hurt_box: HurtBoxComponent = %HurtBoxComponent
 @onready var _life_timer: Timer = %LifeTimer
@@ -52,6 +54,7 @@ func _ready() -> void:
     _velocity.set_acceleration_direction(_direction)
     rotation = _direction.angle()
 
+    _hurt_box.damages = _trait.damages
     _hurt_box.body_hurted.connect(_on_body_hurted)
 
     _attached_timer.timeout.connect(_on_life_or_attached_timer_timeout)
