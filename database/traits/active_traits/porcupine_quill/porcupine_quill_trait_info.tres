@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="TraitInfo" load_steps=2 format=3 uid="uid://djrvv6wnpeooc"]
 
-[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/trait_info.gd" id="1_bofrg"]
+[ext_resource type="Script" uid="uid://bbyk7f3vhtjvv" path="res://database/traits/trait_info.gd" id="1_bofrg"]
 
 [resource]
 script = ExtResource("1_bofrg")
