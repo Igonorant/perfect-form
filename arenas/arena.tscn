@@ -17,6 +17,8 @@ normal = Vector2(1, 0)
 normal = Vector2(-1, 0)
 
 [node name="Arena" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_erld0")
 
 [node name="BorderColor" type="ColorRect" parent="."]
@@ -52,6 +54,7 @@ shape = SubResource("WorldBoundaryShape2D_h0wof")
 
 [node name="Player" parent="." instance=ExtResource("1_qfwod")]
 unique_name_in_owner = true
+z_as_relative = false
 position = Vector2(640, 360)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -71,15 +74,19 @@ wait_time = 3.0
 autostart = true
 
 [node name="Enemy" parent="." instance=ExtResource("4_huq5d")]
+z_as_relative = false
 position = Vector2(894, 221)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_huq5d")]
+z_as_relative = false
 position = Vector2(466, 237)
 
 [node name="Enemy3" parent="." instance=ExtResource("4_huq5d")]
+z_as_relative = false
 position = Vector2(912, 470)
 
 [node name="Enemy4" parent="." instance=ExtResource("4_huq5d")]
+z_as_relative = false
 position = Vector2(403, 481)
 
 [node name="HUD" type="CanvasLayer" parent="."]
