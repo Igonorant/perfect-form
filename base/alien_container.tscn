@@ -1,0 +1,139 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpdcun3o3ylef"]
+
+[ext_resource type="Texture2D" uid="uid://br2iwexvvs2ma" path="res://assets/alien_container.png" id="1_8k4jw"]
+[ext_resource type="Texture2D" uid="uid://pwbpyrmblpg3" path="res://assets/icon_placeholder.png" id="2_lctwg"]
+
+[node name="AlienContainer" type="PanelContainer"]
+offset_right = 138.0
+offset_bottom = 223.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="AlienName" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Alien Name"
+horizontal_alignment = 1
+
+[node name="AlienAndActiveTraits" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="IncubatingAlien" type="MarginContainer" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IncubatingAlienTexture" type="TextureRect" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/IncubatingAlien"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+texture = ExtResource("1_8k4jw")
+expand_mode = 3
+
+[node name="ActiveTraits" type="VBoxContainer" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="TraitM1" type="MarginContainer" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/ActiveTraits"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IconPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/ActiveTraits/TraitM1"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("2_lctwg")
+expand_mode = 5
+
+[node name="TraitM2" type="MarginContainer" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/ActiveTraits"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IconPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/ActiveTraits/TraitM2"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("2_lctwg")
+expand_mode = 5
+
+[node name="TraitShift" type="MarginContainer" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/ActiveTraits"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IconPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/ActiveTraits/TraitShift"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("2_lctwg")
+expand_mode = 5
+
+[node name="TraitSpace" type="MarginContainer" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/ActiveTraits"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IconPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/AlienAndActiveTraits/ActiveTraits/TraitSpace"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("2_lctwg")
+expand_mode = 5
+
+[node name="PassiveTraits" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="TraitPassive1" type="MarginContainer" parent="MarginContainer/VBoxContainer/PassiveTraits"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IconPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/PassiveTraits/TraitPassive1"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("2_lctwg")
+expand_mode = 5
+
+[node name="TraitPassive2" type="MarginContainer" parent="MarginContainer/VBoxContainer/PassiveTraits"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IconPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/PassiveTraits/TraitPassive2"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("2_lctwg")
+expand_mode = 5
+
+[node name="TraitPassive3" type="MarginContainer" parent="MarginContainer/VBoxContainer/PassiveTraits"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="IconPlaceholder" type="TextureRect" parent="MarginContainer/VBoxContainer/PassiveTraits/TraitPassive3"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("2_lctwg")
+expand_mode = 5

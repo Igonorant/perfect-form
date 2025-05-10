@@ -1,6 +1,9 @@
 class_name PorcupineEnemy
 extends CharacterBody2D
 
+@export_range(0.0, 2000.0, 1.0, "pixels") var sight_range: float = 180.0
+var _sight_range_squared: float = sight_range * sight_range
+
 @onready var _velocity: VelocityComponent = %VelocityComponent
 @onready var _health: HealthComponent = %HealthComponent
 @onready var _animation: AnimationPlayer = %AnimationPlayer
@@ -97,6 +100,8 @@ func turn_right() -> void:
     _spikes_sprite.position = _spikes_sprite_original_position
     _hurtbox_collision_shape.position = _hurtbox_collision_shape_original_position
 
+func _is_target_on_sight() -> bool:
+    return global_position.distance_squared_to(_target.global_position) <= _sight_range_squared
 
 ### IDLE STATE ###
 #region idle_state
@@ -122,7 +127,10 @@ func _about_to_enter_moving() -> void:
     _moving_timer.start()
 
 func _on_moving_timer_timeout() -> void:
-    _fsm.set_state(Behavior.ATTACKING)
+    if (_is_target_on_sight()):
+        _fsm.set_state(Behavior.ATTACKING)
+    else:
+        _fsm.set_state(Behavior.IDLE)
 
 func _in_state_moving_physics_process() -> void:
     _velocity.set_acceleration_direction(_target.global_position - global_position)
