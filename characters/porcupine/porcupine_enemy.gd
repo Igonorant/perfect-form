@@ -26,7 +26,7 @@ var _target: Node2D
 var _invulnerable: bool = false
 
 var _power: Power
-enum ModifierOption {NONE, MULTISHOT}
+enum ModifierOption {NONE, MULTISHOT, SHOTGUNIZER, RINGSHOT}
 @onready var _trait_scene: PackedScene = preload("uid://b80u6558u77jj")
 
 enum Behavior {IDLE, MOVING, ATTACKING, TAKING_DAMAGE, DEAD}
@@ -63,6 +63,8 @@ func _create_power() -> void:
     match trait_to_add:
         ModifierOption.NONE: pass
         ModifierOption.MULTISHOT: _power.add_trait_modifier(MultishotRes.new())
+        ModifierOption.SHOTGUNIZER: _power.add_trait_modifier(ShotgunizerRes.new())
+        ModifierOption.RINGSHOT: _power.add_trait_modifier(RingshotRes.new())
     add_child(_power)
 
 func set_target(target: Node2D) -> void:
