@@ -5,7 +5,7 @@ extends Node
 ## Maximum speed in pixels/sec
 @export_range(0.0, 2000.0, 1.0, "or_greater", "suffix:pixels/seconds") var speed_limit: float = 500.0
 ## Time in seconds to reach the maximum speed
-@export_range(0.01, 5.0, 0.01, "or_greater", "suffix:seconds") var acceleration_time: float = 0.01
+@export_range(0.0, 5.0, 0.01, "or_greater", "suffix:seconds") var acceleration_time: float = 0.01
 ## Time in seconds to stop when there is no acceleration, 999 means no deceleration.
 ## This is used to calculate the static and dynamic friction.
 ## NOTE: Instead of 999 it should be INF, but using INF does not work well in the editor
@@ -35,13 +35,19 @@ func _ready() -> void:
         _dynamic_friction = 0.0
 
 func _physics_process(delta: float) -> void:
+    # If acceleration is infinity, we can just lock the max speed to the direction
+    if (_acceleration == INF):
+        assert(_direction.is_normalized(), "Direction should always be normalized")
+        _velocity = _direction * speed_limit
+        return
+
     # Apply friction to both components
     _velocity = Vector2(_add_friction(_velocity.x, delta), _add_friction(_velocity.y, delta))
 
     # Accelerate if there is a direction input
     if !_direction.is_zero_approx():
-        assert(_direction.is_normalized(), "Direction should be normalized")
-        _velocity += _direction * (_acceleration * delta)
+        assert(_direction.is_normalized(), "Direction should always be normalized")
+        _velocity += _direction * _acceleration * delta
 
     # Clamp velocity within limits
     _velocity = _velocity.limit_length(speed_limit)
