@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://f6kdul6wfu40"]
+[gd_scene load_steps=8 format=3 uid="uid://f6kdul6wfu40"]
 
 [ext_resource type="Script" uid="uid://cxbfvyanvy4bw" path="res://arenas/arena.gd" id="1_erld0"]
 [ext_resource type="PackedScene" uid="uid://cqtr5u7m31ils" path="res://characters/player.tscn" id="1_qfwod"]
 [ext_resource type="PackedScene" uid="uid://btiu0rtlstvr5" path="res://hud/player_hud.tscn" id="3_epw2v"]
-[ext_resource type="PackedScene" uid="uid://dhxy10pkp0psr" path="res://characters/static_enemy.tscn" id="4_huq5d"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ubfh8"]
 normal = Vector2(0, 1)
@@ -70,24 +69,8 @@ position_smoothing_speed = 4.0
 editor_draw_limits = true
 
 [node name="SpawnEnemyTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.3
 autostart = true
-
-[node name="Enemy" parent="." instance=ExtResource("4_huq5d")]
-z_as_relative = false
-position = Vector2(894, 221)
-
-[node name="Enemy2" parent="." instance=ExtResource("4_huq5d")]
-z_as_relative = false
-position = Vector2(466, 237)
-
-[node name="Enemy3" parent="." instance=ExtResource("4_huq5d")]
-z_as_relative = false
-position = Vector2(912, 470)
-
-[node name="Enemy4" parent="." instance=ExtResource("4_huq5d")]
-z_as_relative = false
-position = Vector2(403, 481)
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
