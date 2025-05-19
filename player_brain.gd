@@ -44,11 +44,16 @@ func _unhandled_key_input(event: InputEvent) -> void:
     _calculate_move_direction(event)
 
 
-func _unhandled_input(_event: InputEvent) -> void:
-    # Handle mouse input and position
-    pass
+func _unhandled_input(event: InputEvent) -> void:
+    if event is InputEventMouseMotion:
+        # Calculate the mouse position in global coordinates
+        #   Mouse position is relative to the viewport, from 0,0 to viewport size
+        var half_viewport_size: Vector2 = get_viewport().get_visible_rect().size / 2.0
+        var camera_global_position: Vector2 = get_viewport().get_camera_2d().global_position
+        var global_mouse_position: Vector2 = event.position - half_viewport_size + camera_global_position
+        look_direction = (global_mouse_position - owner.global_position).normalized()
 
-func update_animation(animation: AnimationPlayer) -> void:
+func update_sprites(animation: AnimationPlayer, eye: Sprite2D) -> void:
     if (move_direction.is_zero_approx()):
         if _facing_right:
             animation.play("idle_r")
@@ -59,3 +64,5 @@ func update_animation(animation: AnimationPlayer) -> void:
             animation.play("move_r")
         else:
             animation.play("move_l")
+
+    eye.position = look_direction * 2.0

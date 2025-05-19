@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://ysqf1q1kqnag"]
+[gd_scene load_steps=13 format=3 uid="uid://ysqf1q1kqnag"]
 
 [ext_resource type="Script" uid="uid://rqebbcr7808k" path="res://player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://dvr3avphcd3ht" path="res://assets/player_sprite_sheet.png" id="2_hqtel"]
 [ext_resource type="Script" uid="uid://bu2ocplv3upk4" path="res://player_brain.gd" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://b3f5cyhnvhumi" path="res://move.gd" id="4_sweqy"]
+[ext_resource type="Texture2D" uid="uid://dvigtxihilvy0" path="res://assets/player_eye.png" id="5_sweqy"]
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 0.001
@@ -97,12 +98,14 @@ _data = {
 &"move_r": SubResource("Animation_dw050")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
-radius = 3.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqy"]
+radius = 6.0
+height = 20.0
 
 [node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_4flbx")
+metadata/_edit_group_ = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
@@ -111,12 +114,18 @@ libraries = {
 }
 
 [node name="SpriteSheet" type="Sprite2D" parent="."]
+position = Vector2(0, 3)
 texture = ExtResource("2_hqtel")
 hframes = 5
 vframes = 2
 
+[node name="PlayerEyeSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("5_sweqy")
+
 [node name="CollisionBox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_i3pqv")
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_sweqy")
 debug_color = Color(0, 1, 0, 0.419608)
 
 [node name="PlayerBrain" type="Node" parent="."]
