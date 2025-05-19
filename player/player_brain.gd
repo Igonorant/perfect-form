@@ -1,11 +1,15 @@
 class_name PlayerBrain
 extends Brain
 
+@export_range(0.0, 5.0, 0.25) var max_eye_distance: float = 2.5
+
 var _facing_right: bool = true
 var _up_pressed: bool = false
 var _down_pressed: bool = false
 var _left_pressed: bool = false
 var _right_pressed: bool = false
+var _eye_distance: float = 0.0
+
 
 func _calculate_move_direction(event: InputEvent) -> void:
     if (event.is_action_pressed("p_up")):
@@ -44,16 +48,24 @@ func _unhandled_key_input(event: InputEvent) -> void:
     _calculate_move_direction(event)
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _calculate_look_direction(event: InputEvent) -> void:
     if event is InputEventMouseMotion:
         # Calculate the mouse position in global coordinates
         #   Mouse position is relative to the viewport, from 0,0 to viewport size
         var half_viewport_size: Vector2 = get_viewport().get_visible_rect().size / 2.0
         var camera_global_position: Vector2 = get_viewport().get_camera_2d().global_position
         var global_mouse_position: Vector2 = event.position - half_viewport_size + camera_global_position
-        look_direction = (global_mouse_position - owner.global_position).normalized()
+        var player_to_mouse_direction: Vector2 = global_mouse_position - owner.global_position
+        var player_to_mouse_distance: float = player_to_mouse_direction.length()
+        _eye_distance = min(max_eye_distance, max_eye_distance * player_to_mouse_distance / half_viewport_size.y)
+        look_direction = player_to_mouse_direction / player_to_mouse_distance
 
-func update_sprites(animation: AnimationPlayer, eye: Sprite2D) -> void:
+
+func _unhandled_input(event: InputEvent) -> void:
+    _calculate_look_direction(event)
+
+
+func update_sprites(animation: AnimationPlayer, eye: PlayerEye) -> void:
     if (move_direction.is_zero_approx()):
         if _facing_right:
             animation.play("idle_r")
@@ -65,4 +77,4 @@ func update_sprites(animation: AnimationPlayer, eye: Sprite2D) -> void:
         else:
             animation.play("move_l")
 
-    eye.position = look_direction * 2.0
+    eye.set_eye_position(look_direction * _eye_distance)

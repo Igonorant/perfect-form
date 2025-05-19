@@ -1,8 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://8n26rybr8n1l"]
+[gd_scene load_steps=9 format=3 uid="uid://8n26rybr8n1l"]
 
 [ext_resource type="Texture2D" uid="uid://da84xdwe4qrwk" path="res://assets/background.png" id="1_h2yge"]
-[ext_resource type="PackedScene" uid="uid://ysqf1q1kqnag" path="res://player.tscn" id="1_ig7tw"]
-[ext_resource type="Script" uid="uid://cib84g5od1p6b" path="res://status_res.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://ysqf1q1kqnag" path="res://player/player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cib84g5od1p6b" path="res://database/status_res.gd" id="2_0xm2m"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1bvp3"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lquwl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
+normal = Vector2(-1, 0)
 
 [sub_resource type="Resource" id="Resource_h2yge"]
 script = ExtResource("2_0xm2m")
@@ -32,6 +43,24 @@ metadata/_custom_type_script = "uid://cib84g5od1p6b"
 [node name="Main" type="Node"]
 
 [node name="Arena" type="Node" parent="."]
+
+[node name="WorldBoundary" type="StaticBody2D" parent="Arena"]
+
+[node name="Top" type="CollisionShape2D" parent="Arena/WorldBoundary"]
+position = Vector2(-960, -540)
+shape = SubResource("WorldBoundaryShape2D_h2yge")
+
+[node name="Left" type="CollisionShape2D" parent="Arena/WorldBoundary"]
+position = Vector2(-960, -540)
+shape = SubResource("WorldBoundaryShape2D_1bvp3")
+
+[node name="Bottom" type="CollisionShape2D" parent="Arena/WorldBoundary"]
+position = Vector2(960, 540)
+shape = SubResource("WorldBoundaryShape2D_lquwl")
+
+[node name="Right" type="CollisionShape2D" parent="Arena/WorldBoundary"]
+position = Vector2(960, 540)
+shape = SubResource("WorldBoundaryShape2D_7mycd")
 
 [node name="Background" type="Sprite2D" parent="Arena"]
 texture = ExtResource("1_h2yge")

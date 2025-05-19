@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var _move: Move = %Move
 @onready var _brain: PlayerBrain = %PlayerBrain
 @onready var _animation: AnimationPlayer = %AnimationPlayer
-@onready var _eye: Sprite2D = %PlayerEyeSprite
+@onready var _eye: PlayerEye = %PlayerEye
 
 func _ready() -> void:
     _move.load(status)
