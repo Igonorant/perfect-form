@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bad0ymkvuc6ii"]
+
+[ext_resource type="Script" uid="uid://bu2ocplv3upk4" path="res://player_brain.gd" id="1_g6cdv"]
+
+[node name="PlayerBrain" type="Node"]
+script = ExtResource("1_g6cdv")

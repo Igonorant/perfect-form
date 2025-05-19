@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://8n26rybr8n1l"]
+
+[ext_resource type="PackedScene" uid="uid://ysqf1q1kqnag" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://cib84g5od1p6b" path="res://status_res.gd" id="2_0xm2m"]
+
+[sub_resource type="Resource" id="Resource_h2yge"]
+script = ExtResource("2_0xm2m")
+max_hp = 100.0
+hp_regen = 0.0
+invulnerability_window = 0.0
+max_shield = 0.0
+shield_regen = 0.0
+shield_regen_wait_time = 4.0
+bludgeoning_effect_resistance = 0.0
+stun_status_resistance = 0.0
+piercing_effect_resistance = 0.0
+bleeding_status_resistance = 0.0
+fire_effect_resistance = 0.0
+burn_status_resistance = 0.0
+cold_effect_resistance = 0.0
+frozen_status_resistance = 0.0
+lightning_effect_resistance = 0.0
+shock_status_resistance = 0.0
+poison_effect_resistance = 0.0
+poisoned_status_resistance = 0.0
+max_speed = 500.0
+acceleration_time = 0.1
+deceleration_time = 0.4
+metadata/_custom_type_script = "uid://cib84g5od1p6b"
+
+[node name="Main" type="Node"]
+
+[node name="Arena" type="Node" parent="."]
+
+[node name="Player" parent="Arena" instance=ExtResource("1_ig7tw")]
+status = SubResource("Resource_h2yge")

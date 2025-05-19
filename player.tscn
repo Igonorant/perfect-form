@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://ysqf1q1kqnag"]
+
+[ext_resource type="Script" uid="uid://rqebbcr7808k" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://dkbbtsk6glqsp" path="res://icon.svg" id="2_onrkg"]
+[ext_resource type="Script" uid="uid://bu2ocplv3upk4" path="res://player_brain.gd" id="3_hqtel"]
+[ext_resource type="Script" uid="uid://b3f5cyhnvhumi" path="res://move.gd" id="4_sweqy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i3pqv"]
+radius = 3.0
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_4flbx")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_onrkg")
+
+[node name="CollisionBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i3pqv")
+debug_color = Color(0, 1, 0, 0.419608)
+
+[node name="PlayerBrain" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("3_hqtel")
+metadata/_custom_type_script = "uid://bu2ocplv3upk4"
+
+[node name="Move" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_sweqy")
+metadata/_custom_type_script = "uid://b3f5cyhnvhumi"
