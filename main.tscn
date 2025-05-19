@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://8n26rybr8n1l"]
+[gd_scene load_steps=5 format=3 uid="uid://8n26rybr8n1l"]
 
+[ext_resource type="Texture2D" uid="uid://da84xdwe4qrwk" path="res://assets/background.png" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ysqf1q1kqnag" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cib84g5od1p6b" path="res://status_res.gd" id="2_0xm2m"]
 
@@ -32,5 +33,10 @@ metadata/_custom_type_script = "uid://cib84g5od1p6b"
 
 [node name="Arena" type="Node" parent="."]
 
+[node name="Background" type="Sprite2D" parent="Arena"]
+texture = ExtResource("1_h2yge")
+
 [node name="Player" parent="Arena" instance=ExtResource("1_ig7tw")]
 status = SubResource("Resource_h2yge")
+
+[node name="Camera2D" type="Camera2D" parent="Arena/Player"]
