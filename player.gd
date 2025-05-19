@@ -6,9 +6,11 @@ extends CharacterBody2D
 
 @onready var _move = %Move
 @onready var _brain = %PlayerBrain
+@onready var _animation = $AnimationPlayer
 
 func _ready() -> void:
     _move.load(status)
 
 func _physics_process(delta: float) -> void:
     _move.execute(self, _brain.get_move_direction(), delta)
+    _brain.update_animation(_animation)
