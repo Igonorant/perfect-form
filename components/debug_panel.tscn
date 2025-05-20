@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bm3g1jlnpt2u6"]
+
+[ext_resource type="Script" uid="uid://b7qoaqlu34eyp" path="res://components/debug_panel.gd" id="1_pd2kx"]
+[ext_resource type="FontFile" uid="uid://rkglv8hfbbj7" path="res://assets/fonts/quinquefive/QuinqueFive.otf" id="2_pd2kx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pd2kx"]
+content_margin_bottom = 2.0
+bg_color = Color(0, 0, 0, 0.678431)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.384385, 0.751133, 1)
+
+[node name="DebugPanel" type="PanelContainer"]
+offset_right = 44.0
+offset_bottom = 15.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pd2kx")
+script = ExtResource("1_pd2kx")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.778809, 0.66202, 1, 1)
+theme_override_fonts/font = ExtResource("2_pd2kx")
+theme_override_font_sizes/font_size = 5
+text = "Not set"

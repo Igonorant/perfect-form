@@ -8,9 +8,10 @@ var _static_friction: float
 var _dynamic_friction: float
 
 func _to_string() -> String:
-    return "Move: max_speed: %f, acceleration: %f, static_friction: %f, dynamic_friction: %f" % [
-        _max_speed, _acceleration, _static_friction, _dynamic_friction
-    ]
+    var line1: String = "ms %d \tac %.1f" % [_max_speed, _acceleration]
+    var line2: String = "sf %.1f \tdf %.1f" % [_static_friction, _dynamic_friction]
+    var line3: String = "pvel %4d %4d" % [get_parent().velocity.x, get_parent().velocity.y]
+    return line1 + "\n" + line2 + "\n" + line3
 
 func load(status: StatusRes) -> void:
     _max_speed = status.max_speed
@@ -31,6 +32,9 @@ func load(status: StatusRes) -> void:
 func execute(body: CharacterBody2D, direction: Vector2, delta: float) -> void:
     # If acceleration is infinity, we can just lock the max speed to the direction
     if (_acceleration == INF):
+        if (direction.is_zero_approx()):
+            body.velocity = Vector2.ZERO
+            return
         assert(direction.is_normalized(), "Direction should always be normalized")
         body.velocity = direction * _max_speed
         body.move_and_slide()

@@ -71,4 +71,5 @@ texture = ExtResource("1_h2yge")
 status = SubResource("Resource_h2yge")
 
 [node name="Camera2D" type="Camera2D" parent="Arena/Player"]
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
