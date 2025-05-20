@@ -35,7 +35,7 @@ lightning_effect_resistance = 0.0
 shock_status_resistance = 0.0
 poison_effect_resistance = 0.0
 poisoned_status_resistance = 0.0
-max_speed = 200.0
+max_speed = 80.0
 acceleration_time = 0.1
 deceleration_time = 0.4
 metadata/_custom_type_script = "uid://cib84g5od1p6b"
@@ -68,6 +68,7 @@ z_index = -10
 texture = ExtResource("1_h2yge")
 
 [node name="Player" parent="Arena" instance=ExtResource("1_ig7tw")]
+y_sort_enabled = true
 status = SubResource("Resource_h2yge")
 
 [node name="Camera2D" type="Camera2D" parent="Arena/Player"]

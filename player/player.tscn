@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://ysqf1q1kqnag"]
+[gd_scene load_steps=13 format=3 uid="uid://ysqf1q1kqnag"]
 
 [ext_resource type="Script" uid="uid://rqebbcr7808k" path="res://player/player.gd" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://dvr3avphcd3ht" path="res://assets/player_sprite_sheet.png" id="2_hqtel"]
 [ext_resource type="Script" uid="uid://bu2ocplv3upk4" path="res://player/player_brain.gd" id="3_hqtel"]
 [ext_resource type="PackedScene" uid="uid://bcoxemkbkkffv" path="res://player/player_eye.tscn" id="3_qjkh3"]
 [ext_resource type="Script" uid="uid://b3f5cyhnvhumi" path="res://components/move.gd" id="4_sweqy"]
-[ext_resource type="PackedScene" uid="uid://bm3g1jlnpt2u6" path="res://components/debug_panel.tscn" id="5_g6k8r"]
 
 [sub_resource type="Animation" id="Animation_sweqy"]
 length = 0.001
@@ -131,12 +130,6 @@ debug_color = Color(0, 1, 0, 0.419608)
 unique_name_in_owner = true
 script = ExtResource("3_hqtel")
 metadata/_custom_type_script = "uid://bu2ocplv3upk4"
-
-[node name="DebugPanel" parent="PlayerBrain" instance=ExtResource("5_g6k8r")]
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 56.0
-offset_bottom = 23.0
 
 [node name="Move" type="Node" parent="."]
 unique_name_in_owner = true
