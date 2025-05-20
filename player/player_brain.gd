@@ -19,9 +19,9 @@ var _power_space_pressed: bool = false
 
 
 func _to_string() -> String:
-    var line1: String = " %s  M1 %d M2 %d  eye" % ["u" if _up_pressed else " ", int(_power_m1_pressed), int(_power_m2_pressed)]
-    var line2: String = "%s %s Sh %d SP %d  %.1f" % ["l" if _left_pressed else " ", "r" if _right_pressed else " ", int(_power_shift_pressed), int(_power_space_pressed), look_direction.x]
-    var line3: String = " %s  FacingR %d  %.1f" % ["d" if _down_pressed else " ", int(_facing_right), look_direction.y]
+    var line1: String = " %s  M1 %d M2 %d eye" % ["u" if _up_pressed else "-", int(_power_m1_pressed), int(_power_m2_pressed)]
+    var line2: String = "%s %s Sh %d SP %d %.1f" % ["l" if _left_pressed else "-", "r" if _right_pressed else "-", int(_power_shift_pressed), int(_power_space_pressed), look_direction.x]
+    var line3: String = " %s  Facing %s %.1f" % ["d" if _down_pressed else "-", "Rh" if _facing_right else "Lf", look_direction.y]
     return line1 + "\n" + line2 + "\n" + line3
 
 func _unhandled_key_input(event: InputEvent) -> void:
