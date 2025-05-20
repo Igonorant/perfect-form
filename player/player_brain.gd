@@ -4,11 +4,28 @@ extends Brain
 @export_range(0.0, 5.0, 0.25) var max_eye_distance: float = 2.5
 
 var _facing_right: bool = true
+
 var _up_pressed: bool = false
 var _down_pressed: bool = false
 var _left_pressed: bool = false
 var _right_pressed: bool = false
+
 var _eye_distance: float = 0.0
+
+var _power_m1_pressed: bool = false
+var _power_m2_pressed: bool = false
+var _power_shift_pressed: bool = false
+var _power_space_pressed: bool = false
+
+
+func _unhandled_key_input(event: InputEvent) -> void:
+    _calculate_move_direction(event)
+    _calculate_key_interaction_intent(event)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+    _calculate_look_direction(event)
+    _calculate_mouse_interaction_intent(event)
 
 
 func _calculate_move_direction(event: InputEvent) -> void:
@@ -44,8 +61,27 @@ func _calculate_move_direction(event: InputEvent) -> void:
     move_direction = move_direction.normalized()
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
-    _calculate_move_direction(event)
+func _calculate_key_interaction_intent(event: InputEvent) -> void:
+    if (event.is_action_pressed("p_shift")):
+        _power_shift_pressed = true
+    elif (event.is_action_released("p_shift")):
+        _power_shift_pressed = false
+    elif (event.is_action_pressed("p_space")):
+        _power_space_pressed = true
+    elif (event.is_action_released("p_space")):
+        _power_space_pressed = false
+
+
+func _calculate_mouse_interaction_intent(event: InputEvent) -> void:
+    if event is InputEventMouseButton:
+        if (event.is_action_pressed("p_m1")):
+            _power_m1_pressed = true
+        elif (event.is_action_released("p_m1")):
+            _power_m1_pressed = false
+        elif (event.is_action_pressed("p_m2")):
+            _power_m2_pressed = true
+        elif (event.is_action_released("p_m2")):
+            _power_m2_pressed = false
 
 
 func _calculate_look_direction(event: InputEvent) -> void:
@@ -59,10 +95,6 @@ func _calculate_look_direction(event: InputEvent) -> void:
         var player_to_mouse_distance: float = player_to_mouse_direction.length()
         _eye_distance = min(max_eye_distance, max_eye_distance * player_to_mouse_distance / half_viewport_size.y)
         look_direction = player_to_mouse_direction / player_to_mouse_distance
-
-
-func _unhandled_input(event: InputEvent) -> void:
-    _calculate_look_direction(event)
 
 
 func update_sprites(animation: AnimationPlayer, eye: PlayerEye) -> void:
