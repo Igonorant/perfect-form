@@ -40,9 +40,10 @@ acceleration_time = 0.1
 deceleration_time = 0.4
 metadata/_custom_type_script = "uid://cib84g5od1p6b"
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node2D"]
+y_sort_enabled = true
 
-[node name="Arena" type="Node" parent="."]
+[node name="Arena" type="Node2D" parent="."]
 
 [node name="WorldBoundary" type="StaticBody2D" parent="Arena"]
 
@@ -63,6 +64,7 @@ position = Vector2(960, 540)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
 [node name="Background" type="Sprite2D" parent="Arena"]
+z_index = -10
 texture = ExtResource("1_h2yge")
 
 [node name="Player" parent="Arena" instance=ExtResource("1_ig7tw")]
