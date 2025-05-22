@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://8n26rybr8n1l"]
+[gd_scene load_steps=17 format=3 uid="uid://8n26rybr8n1l"]
 
 [ext_resource type="Texture2D" uid="uid://da84xdwe4qrwk" path="res://assets/background.png" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ysqf1q1kqnag" path="res://player/player.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://cib84g5od1p6b" path="res://database/status_res.gd" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://c4dbaej87486p" path="res://components/hit_box.tscn" id="4_1bvp3"]
+[ext_resource type="Script" uid="uid://wm5kqhpb7i31" path="res://database/effect_res.gd" id="5_7mycd"]
+[ext_resource type="Script" uid="uid://cthg6ngwrg6k5" path="res://database/effect.gd" id="6_272bh"]
+[ext_resource type="PackedScene" uid="uid://bm3g1jlnpt2u6" path="res://components/debug_panel.tscn" id="7_272bh"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h2yge"]
 normal = Vector2(0, 1)
@@ -40,6 +44,29 @@ acceleration_time = 0.1
 deceleration_time = 0.4
 metadata/_custom_type_script = "uid://cib84g5od1p6b"
 
+[sub_resource type="Resource" id="Resource_5vw27"]
+script = ExtResource("5_7mycd")
+effect_type = 0
+effect_value = 885.0
+status_type = 3
+status_buildup = 0.44
+metadata/_custom_type_script = "uid://wm5kqhpb7i31"
+
+[sub_resource type="Resource" id="Resource_272bh"]
+script = ExtResource("5_7mycd")
+effect_type = 2
+effect_value = 32.0
+status_type = 6
+status_buildup = 0.13
+metadata/_custom_type_script = "uid://wm5kqhpb7i31"
+
+[sub_resource type="Resource" id="Resource_kek77"]
+script = ExtResource("6_272bh")
+effects = Array[ExtResource("5_7mycd")]([SubResource("Resource_5vw27"), SubResource("Resource_272bh")])
+metadata/_custom_type_script = "uid://cthg6ngwrg6k5"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1bvp3"]
+
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 
@@ -74,3 +101,17 @@ status = SubResource("Resource_h2yge")
 [node name="Camera2D" type="Camera2D" parent="Arena/Player"]
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
+
+[node name="HitBox" parent="." instance=ExtResource("4_1bvp3")]
+position = Vector2(76, -43)
+on_hit_effect = SubResource("Resource_kek77")
+
+[node name="DebugPanel" parent="HitBox" instance=ExtResource("7_272bh")]
+offset_left = 12.0
+offset_top = 9.0
+offset_right = 58.0
+offset_bottom = 24.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+shape = SubResource("CircleShape2D_1bvp3")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
