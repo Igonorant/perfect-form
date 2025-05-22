@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://8n26rybr8n1l"]
+[gd_scene load_steps=18 format=3 uid="uid://8n26rybr8n1l"]
 
 [ext_resource type="Texture2D" uid="uid://da84xdwe4qrwk" path="res://assets/background.png" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ysqf1q1kqnag" path="res://player/player.tscn" id="1_ig7tw"]
@@ -18,6 +18,9 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7mycd"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_272bh"]
+blend_mode = 3
 
 [sub_resource type="Resource" id="Resource_h2yge"]
 script = ExtResource("2_0xm2m")
@@ -75,23 +78,29 @@ y_sort_enabled = true
 [node name="WorldBoundary" type="StaticBody2D" parent="Arena"]
 
 [node name="Top" type="CollisionShape2D" parent="Arena/WorldBoundary"]
-position = Vector2(-960, -540)
+position = Vector2(-720, -405)
 shape = SubResource("WorldBoundaryShape2D_h2yge")
 
 [node name="Left" type="CollisionShape2D" parent="Arena/WorldBoundary"]
-position = Vector2(-960, -540)
+position = Vector2(-720, -405)
 shape = SubResource("WorldBoundaryShape2D_1bvp3")
 
 [node name="Bottom" type="CollisionShape2D" parent="Arena/WorldBoundary"]
-position = Vector2(960, 540)
+position = Vector2(720, 405)
 shape = SubResource("WorldBoundaryShape2D_lquwl")
 
 [node name="Right" type="CollisionShape2D" parent="Arena/WorldBoundary"]
-position = Vector2(960, 540)
+position = Vector2(720, 405)
 shape = SubResource("WorldBoundaryShape2D_7mycd")
 
-[node name="Background" type="Sprite2D" parent="Arena"]
+[node name="BackgroundBack" type="Sprite2D" parent="Arena"]
 z_index = -10
+material = SubResource("CanvasItemMaterial_272bh")
+texture = ExtResource("1_h2yge")
+
+[node name="BackgroundFront" type="Sprite2D" parent="Arena"]
+z_index = -10
+scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_h2yge")
 
 [node name="Player" parent="Arena" instance=ExtResource("1_ig7tw")]
